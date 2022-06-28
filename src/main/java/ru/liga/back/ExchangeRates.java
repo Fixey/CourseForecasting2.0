@@ -15,7 +15,7 @@ public class ExchangeRates {
 
     public LocalDate date = null;
     public BigDecimal rate = BigDecimal.ZERO;
-    public String currency = "";
+    public Enum currency;
 
     ExchangeRates() {
 
@@ -31,7 +31,7 @@ public class ExchangeRates {
         this.date = date;
     }
 
-    ExchangeRates(String currency, BigDecimal rate, LocalDate date) {
+    ExchangeRates(Enum currency, BigDecimal rate, LocalDate date) {
         this.currency = currency;
         this.rate = rate;
         this.date = date;
@@ -45,9 +45,7 @@ public class ExchangeRates {
     public String getDateAndRate() {
         final String srtDate = DATE_TIME_FORMATTER.format(date);
 
-        String dateAndRateResult = Character.toUpperCase(srtDate.charAt(0)) + srtDate.substring(1) + " - "
+        return Character.toUpperCase(srtDate.charAt(0)) + srtDate.substring(1) + " - "
                 + String.format("%.2f", rate);
-
-        return dateAndRateResult;
     }
 }

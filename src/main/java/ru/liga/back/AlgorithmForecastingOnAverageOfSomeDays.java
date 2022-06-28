@@ -17,7 +17,7 @@ public class AlgorithmForecastingOnAverageOfSomeDays implements RateAlgorithm {
      * @return LinkedList<ExchangeRates> лист Курса валют
      */
     @Override
-    public LinkedList<ExchangeRates> getListResult(String currency, int days) {
+    public LinkedList<ExchangeRates> getListResult(Enum currency, int days) {
         //Тащим файл
         FileReader fileReader = new FileReader();
         LinkedList<String> listLines = fileReader.getListLinesFromFile("/csv/" + currency + ".csv");

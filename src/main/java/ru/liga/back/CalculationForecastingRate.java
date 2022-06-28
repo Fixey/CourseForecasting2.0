@@ -18,7 +18,7 @@ public class CalculationForecastingRate {
      * @param currency            Валюта
      * @return LinkedList<ExchangeRates> Список спрогнозированных объектов Курсов Валют
      */
-    public LinkedList<ExchangeRates> getListOfForecastingExchangeRates(LinkedList<ExchangeRates> listExchangeRatesIn, Integer days, String currency) {
+    public LinkedList<ExchangeRates> getListOfForecastingExchangeRates(LinkedList<ExchangeRates> listExchangeRatesIn, Integer days, Enum currency) {
         LinkedList<ExchangeRates> listExchangeRatesForCalc = (LinkedList<ExchangeRates>) listExchangeRatesIn.clone();
         LinkedList<ExchangeRates> listExchangeRates = new LinkedList<>();
         BigDecimal rate;

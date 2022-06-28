@@ -1,8 +1,10 @@
 package ru.liga.front;
 
+import org.apache.commons.lang3.EnumUtils;
 import ru.liga.back.AlgorithmSelector;
 import ru.liga.back.ExchangeRates;
 import ru.liga.back.RateAlgorithm;
+import ru.liga.enums.CurrencyType;
 import ru.liga.exception.CountDaysException;
 import ru.liga.util.PeriodUtils;
 
@@ -23,7 +25,7 @@ public class CommandRate implements Command {
 
         new CommandRateValidation().ValidCommandRate(listArgs); //Проверим корректное написае команды
 
-        String currency = listArgs.get(0).toUpperCase();
+        String currency = listArgs.get(0);
         String period = listArgs.get(1);
         Integer numDays = PeriodUtils.countDayForPeriod(period); //высчитываем кол-во дней за период
         if (numDays == null) {
@@ -35,7 +37,7 @@ public class CommandRate implements Command {
         }
         //Выбор алгоритма
         RateAlgorithm algorithm = new AlgorithmSelector().getAlgorithm(algorithmName);
-        List<ExchangeRates> resultAlgorithm = algorithm.getListResult(currency, numDays); //Получение результата выполнение алгоритма
+        List<ExchangeRates> resultAlgorithm = algorithm.getListResult(EnumUtils.getEnumIgnoreCase(CurrencyType.class,currency), numDays); //Получение результата выполнение алгоритма
 
         //Формируем лист с предсказанными Курсами Валют
         resultAlgorithm.forEach(x -> System.out.println(x.getDateAndRate()));

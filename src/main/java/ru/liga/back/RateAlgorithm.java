@@ -13,5 +13,5 @@ public interface RateAlgorithm {
      * @param day      кол-во дней на сколько надо предсказать курса
      * @return List Результат выполнения алгоритма
      */
-    List getListResult(String currency, int day);
+    List getListResult(Enum currency, int day);
 }
