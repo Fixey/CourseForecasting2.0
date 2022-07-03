@@ -1,6 +1,8 @@
 package ru.liga.front;
 
+
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Класс отвечающий за действия по команде Help
@@ -11,10 +13,12 @@ public class CommandHelp implements Command {
      * Распечатывает список команд прогарммы
      */
     @Override
-    public void invoke(LinkedList<String> listArgs) {
-        System.out.println("Options:");
-        System.out.println("Rate <eur, usd, try> <today, tomorrow, week, month, dd/MM/yyyy>         Print Rate during period");
-        System.out.println("help                                                                    Print commands for this app");
-        System.out.println("exit                                                                    Exit from app");
+    public List invoke(String listArgs) {
+        List<String> listCommands = new LinkedList();
+        listCommands.add("Options:");
+        listCommands.add("Rate <eur, usd, try> <today, tomorrow, week, month, dd/MM/yyyy>         Print Rate during period");
+        listCommands.add("help                                                                  Print commands for this app");
+        listCommands.add("exit                                                                    Exit from app");
+        return listCommands;
     }
 }

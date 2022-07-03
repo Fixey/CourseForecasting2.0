@@ -1,39 +1,30 @@
 package ru.liga.front;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Объект консоль
  */
 @Data
+@AllArgsConstructor
+@Slf4j
 public class Console {
-    @Getter
-    @Setter
+
     public String commandName;
-
-    @Getter
-    @Setter
-    public LinkedList<String> commandArgs;
-
-    public Console(String commandName, LinkedList<String> commandArgs) {
-        this.commandName = commandName;
-        this.commandArgs = commandArgs;
-    }
-
-    public void addArgOfCommand(String argsCommand) {
-        this.commandArgs.add(argsCommand);
-    }
+    public String fullCommand;
 
     /**
      * Обработка команды
      */
-    public void invokeCommand() {
+    public List invokeCommand() {
         Command command = new CommandSelector().getCommand(commandName);
-        command.invoke(commandArgs);
+        log.debug("Console = " + command.getClass().getName());
+        log.info("CommandName = " + commandName);
+        return command.invoke(fullCommand);
     }
 
 }

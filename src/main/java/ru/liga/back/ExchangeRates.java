@@ -1,6 +1,7 @@
 package ru.liga.back;
 
 import lombok.Data;
+import ru.liga.enums.CurrencyType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,25 +14,11 @@ import static ru.liga.constant.ConstantUtil.DATE_TIME_FORMATTER;
 @Data
 public class ExchangeRates {
 
-    public LocalDate date = null;
-    public BigDecimal rate = BigDecimal.ZERO;
-    public Enum currency;
+    public LocalDate date;
+    public BigDecimal rate;
+    public CurrencyType currency;
 
-    ExchangeRates() {
-
-    }
-
-    ExchangeRates(BigDecimal rate) {
-        this.rate = rate;
-        this.date = LocalDate.now();
-    }
-
-    ExchangeRates(BigDecimal rate, LocalDate date) {
-        this.rate = rate;
-        this.date = date;
-    }
-
-    ExchangeRates(Enum currency, BigDecimal rate, LocalDate date) {
+    public ExchangeRates(CurrencyType currency, BigDecimal rate, LocalDate date) {
         this.currency = currency;
         this.rate = rate;
         this.date = date;
@@ -42,7 +29,7 @@ public class ExchangeRates {
      *
      * @return String
      */
-    public String getDateAndRate() {
+    public String getInfo() {
         final String srtDate = DATE_TIME_FORMATTER.format(date);
 
         return Character.toUpperCase(srtDate.charAt(0)) + srtDate.substring(1) + " - "

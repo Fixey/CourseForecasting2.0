@@ -1,11 +1,10 @@
 package ru.liga.front;
 
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import ru.liga.exception.ConsoleArgsException;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-
+@Slf4j
 public class ConsoleParser {
     /**
      * Распарсивает команду с консоли
@@ -16,13 +15,13 @@ public class ConsoleParser {
      */
     public Console consoleParser(@NonNull String args) {
         try {
-            String[] arrParams = args.trim().split("\\s+");
-            String command = arrParams[0].toLowerCase();
-            LinkedList<String> commandArgs = new LinkedList<>
-                    (Arrays.asList(arrParams).subList(1, arrParams.length));
-            return new Console(command, commandArgs);
+            final String[] arrParams = args.trim().split("\\s+");
+            final String command = arrParams[0].toLowerCase();
+            return new Console(command, args);
         } catch (IndexOutOfBoundsException e) {
+            log.error(e.getMessage());
             throw new ConsoleArgsException();
         }
     }
 }
+

@@ -1,13 +1,13 @@
 package ru.liga.front;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Интрефейс Метода команды
  */
 interface Command {
     /**
-     * @param listArgs аргументы метода
+     * @param fullCommand полная команда
      */
-    void invoke(LinkedList<String> listArgs);
+    List invoke(String fullCommand);
 }

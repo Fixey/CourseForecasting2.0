@@ -12,6 +12,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 
+import static ru.liga.constant.ConstantUtil.DATE_REGEX;
 import static ru.liga.constant.ConstantUtil.DATE_TIME_FORMATTER;
 
 public class PeriodUtils {
@@ -24,8 +25,8 @@ public class PeriodUtils {
      */
     public static Integer countDaysUntilDate(@NonNull String date) {
         try {
-            if (date.matches("(\\d{2})/(\\d{2})/(\\d{4})")) {
-                final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            if (date.matches(DATE_REGEX)) {
+                final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
                 final LocalDate date1 = LocalDate.now();
                 final LocalDate date2 = LocalDate.parse(date, dtf);
@@ -82,7 +83,7 @@ public class PeriodUtils {
      * @return Integer кол-во дней до периода
      */
     public static Integer countDayForPeriod(@NonNull String period) {
-        if (period.matches("(\\d{2})/(\\d{2})/(\\d{4})")) {
+        if (period.matches(DATE_REGEX)) {
             return countDaysUntilDate(period);
         } else if (EnumUtils.isValidEnumIgnoreCase(Period.class, period)) {
             return EnumUtils.getEnumIgnoreCase(Period.class, period).getNumDays();
@@ -93,5 +94,16 @@ public class PeriodUtils {
     public static LocalDate toLocalDateTimeFromString(String date){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         return LocalDate.parse(date, dtf);
+    }
+    public static LocalDate toLocalDateTimeFromPeriod(String period){
+        LocalDate resultDate = null;
+        if (period.matches(DATE_REGEX)) {
+            final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            resultDate = LocalDate.parse(period, dtf);
+        } else if (EnumUtils.isValidEnumIgnoreCase(Period.class, period)) {
+            final int numDays =  EnumUtils.getEnumIgnoreCase(Period.class, period).getNumDays();
+            resultDate = LocalDate.now().plusDays(numDays);
+        }
+        return resultDate;
     }
 }
