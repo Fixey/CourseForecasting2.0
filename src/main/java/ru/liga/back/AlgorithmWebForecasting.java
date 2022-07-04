@@ -81,14 +81,11 @@ public class AlgorithmWebForecasting implements IRateAlgorithm {
                 .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
                 .limit(FORECASTING_WEB_NUM).collect(Collectors.toList());
         LocalDate lastDateLineExchangeRate = listExchangeRates.get(0).getDate();
+        double dayCounter =0.0;
         while (!date.isEqual(lastDateLineExchangeRate)) {
-            double lastRates = listExchangeRates.stream()
-                    .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                    .map(ExchangeRates::getRate)
-                    .mapToDouble(BigDecimal::doubleValue)
-                    .findFirst().getAsDouble();
+            dayCounter++;
             LinearRegression linearRegression = new LinearRegression(rangeDays, arrRates);
-            BigDecimal rate = new BigDecimal(linearRegression.predict(lastRates));
+            BigDecimal rate = new BigDecimal(linearRegression.predict(FORECASTING_WEB_NUM.doubleValue()+dayCounter));
             lastDateLineExchangeRate = lastDateLineExchangeRate.plusDays(1);
             listExchangeRates.add(new ExchangeRates(currency, rate, lastDateLineExchangeRate));
         }
