@@ -26,26 +26,6 @@ public class AlgorithmMoonForecasting implements IRateAlgorithm {
      * Формирует лист Курса Валют на n дней
      *
      * @param currency Валюта
-     * @param period   на сколько дней рассчитывать
-     * @return LinkedList<ExchangeRates> лист Курса валют
-     */
-    public LinkedList<ExchangeRates> getListExchangeRates(CurrencyType currency, Integer period) {
-        log.debug("AlgorithmMoonForecasting.getListExchangeRates().args:");
-        log.debug("currency = " + currency.name());
-        log.debug("period = " + period);
-        LinkedList<ExchangeRates> listExchangeRatesRes = new LinkedList<>();
-        for (int i = 1; i <= period; i++) {
-            listExchangeRatesRes.addAll(getListExchangeRates(currency, LocalDate.now().plusDays(i)));
-        }
-        return listExchangeRatesRes;
-    }
-
-    /**
-     * Алгоритм “Прошлогодний”.
-     * Берёте курс за эту дату за прошлый год и показываете. Если на дату нет курса, то за предыдущие дни.
-     * Формирует лист Курса Валют на n дней
-     *
-     * @param currency Валюта
      * @param date     на какой день рассчитывать
      * @return LinkedList<ExchangeRates> лист Курса валют
      */
@@ -62,6 +42,26 @@ public class AlgorithmMoonForecasting implements IRateAlgorithm {
         LinkedList<ExchangeRates> listExchangeRatesRes = new LinkedList<>();
         listExchangeRatesRes.add(new ExchangeRates(currency, rate, date));
         System.out.println("Алгоритм рассчитан");
+        return listExchangeRatesRes;
+    }
+
+    /**
+     * Алгоритм “Прошлогодний”.
+     * Берёте курс за эту дату за прошлый год и показываете. Если на дату нет курса, то за предыдущие дни.
+     * Формирует лист Курса Валют на n дней
+     *
+     * @param currency Валюта
+     * @param period   на сколько дней рассчитывать
+     * @return LinkedList<ExchangeRates> лист Курса валют
+     */
+    public LinkedList<ExchangeRates> getListExchangeRates(CurrencyType currency, Integer period) {
+        log.debug("AlgorithmMoonForecasting.getListExchangeRates().args:");
+        log.debug("currency = " + currency.name());
+        log.debug("period = " + period);
+        LinkedList<ExchangeRates> listExchangeRatesRes = new LinkedList<>();
+        for (int i = 1; i <= period; i++) {
+            listExchangeRatesRes.addAll(getListExchangeRates(currency, LocalDate.now().plusDays(i)));
+        }
         return listExchangeRatesRes;
     }
 }

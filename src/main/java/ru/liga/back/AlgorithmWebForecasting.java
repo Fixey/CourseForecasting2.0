@@ -7,33 +7,32 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static ru.liga.constant.ConstantUtil.FORECASTING_MIST_NUM;
+import static ru.liga.constant.ConstantUtil.FORECASTING_WEB_NUM;
 
 /**
- * Алгоритм рассчета "Мистический"
+ * Алгоритм рассчета "Интернет"
  */
 @Slf4j
-public class AlgorithmMistForecasting implements IRateAlgorithm {
+public class AlgorithmWebForecasting implements IRateAlgorithm {
     private List<ExchangeRates> exchangeRatesFromFiles;
 
-    public AlgorithmMistForecasting(List<ExchangeRates> exchangeRatesFromFiles) {
+    public AlgorithmWebForecasting(List<ExchangeRates> exchangeRatesFromFiles) {
         this.exchangeRatesFromFiles = exchangeRatesFromFiles;
     }
 
     /**
-     * Алгоритм “Мистический”.
-     * Для каждого следующего дня берёте рандомно один из 30 предыдущих дней включая рассчитанные таким образом.
+     * Выполнение алгоритма и вывод результата
      *
-     * @param currency Валюта
-     * @param date     рассчитывать на определенный день
-     * @return LinkedList<ExchangeRates> лист Курса валют
+     * @param currency тип валюты
+     * @param date     дата на который надо предсказать
+     * @return List Результат выполнения алгоритма
      */
     @Override
     public List<ExchangeRates> getListExchangeRates(CurrencyType currency, LocalDate date) {
-        log.debug("AlgorithmMistForecasting.getListExchangeRates().args:");
+        log.debug("AlgorithmWebForecasting.getListExchangeRates().args:");
         log.debug("currency = " + currency.name());
         log.debug("date = " + date);
         List<ExchangeRates> listExchangeRate = getListForecastingRates(currency, date);
@@ -46,16 +45,15 @@ public class AlgorithmMistForecasting implements IRateAlgorithm {
     }
 
     /**
-     * Алгоритм “Мистический”.
-     * Для каждого следующего дня берёте рандомно один из 30 предыдущих дней включая рассчитанные таким образом.
+     * Выполнение алгоритма и вывод результата
      *
-     * @param currency Валюта
-     * @param period   на сколько дней рассчитывать
-     * @return LinkedList<ExchangeRates> лист Курса валют
+     * @param currency тип валюты
+     * @param period   кол-во дней на сколько надо предсказать курса
+     * @return List Результат выполнения алгоритма
      */
     @Override
     public List<ExchangeRates> getListExchangeRates(CurrencyType currency, Integer period) {
-        log.debug("AlgorithmMistForecasting.getListExchangeRates().args:");
+        log.debug("AlgorithmWebForecasting.getListExchangeRates().args:");
         log.debug("currency = " + currency.name());
         log.debug("period = " + period);
         LocalDate localDate = LocalDate.now().plusDays(period);
@@ -67,22 +65,30 @@ public class AlgorithmMistForecasting implements IRateAlgorithm {
                 .collect(Collectors.toList());
     }
 
-
     private List<ExchangeRates> getListForecastingRates(CurrencyType currency, LocalDate date) {
+        double[] arrRates = exchangeRatesFromFiles.stream()
+                .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
+                .limit(FORECASTING_WEB_NUM)
+                .map(ExchangeRates::getRate)
+                .mapToDouble(BigDecimal::doubleValue)
+                .toArray();
+        double[] rangeDays = IntStream.rangeClosed(1, FORECASTING_WEB_NUM)
+                .boxed()
+                .mapToDouble(i -> i)
+                .toArray();
         List<ExchangeRates> listExchangeRates = exchangeRatesFromFiles.stream()
                 .filter(exchangeRates -> exchangeRates.getCurrency().equals(currency))
                 .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                .limit(FORECASTING_MIST_NUM).collect(Collectors.toList());
+                .limit(FORECASTING_WEB_NUM).collect(Collectors.toList());
         LocalDate lastDateLineExchangeRate = listExchangeRates.get(0).getDate();
         while (!date.isEqual(lastDateLineExchangeRate)) {
-            List<BigDecimal> listRates = listExchangeRates.stream()
+            double lastRates = listExchangeRates.stream()
                     .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                    .limit(FORECASTING_MIST_NUM)
                     .map(ExchangeRates::getRate)
-                    .collect(Collectors.toList());
-            Random rand = new Random();
-            final int random_integer = rand.nextInt(listRates.size());
-            BigDecimal rate = listRates.get(random_integer);
+                    .mapToDouble(BigDecimal::doubleValue)
+                    .findFirst().getAsDouble();
+            LinearRegression linearRegression = new LinearRegression(rangeDays, arrRates);
+            BigDecimal rate = new BigDecimal(linearRegression.predict(lastRates));
             lastDateLineExchangeRate = lastDateLineExchangeRate.plusDays(1);
             listExchangeRates.add(new ExchangeRates(currency, rate, lastDateLineExchangeRate));
         }

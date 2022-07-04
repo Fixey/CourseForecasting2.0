@@ -35,7 +35,7 @@ public class AlgorithmSelector implements IAlgorithmSelector {
             case "mist":
                 return new AlgorithmMistForecasting(listExchangeRates);
             case "web":
-                return new AlgorithmMoonForecasting(listExchangeRates);
+                return new AlgorithmWebForecasting(listExchangeRates);
         }
         throw new UnknownAlgorithmException();
     }
