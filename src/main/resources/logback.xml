@@ -3,7 +3,7 @@
     <property name="log.maxHistory" value="7"/>
     <property name="log.filePath" value="./logs"/>
     <property name="log.pattern"
-              value="%d{dd-MM-dd HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{50} - %msg%n"/>
+              value="%d{dd-MM-dd HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{50} -%M - %msg%n"/>
 
     <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
