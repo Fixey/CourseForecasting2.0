@@ -1,41 +1,43 @@
 package ru.liga.back;
 
 
-import com.github.sh0nk.matplotlib4j.Plot;
-import com.github.sh0nk.matplotlib4j.PlotImpl;
-import com.github.sh0nk.matplotlib4j.PythonExecutionException;
-import com.github.sh0nk.matplotlib4j.builder.PlotBuilder;
 import org.junit.jupiter.api.Test;
 import ru.liga.enums.CurrencyType;
 
-import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AlgorithmMistForecastingTest {
 
+
     @Test
-    void getListExchangeRatesTest() {
-        new Configurations();
-        AlgorithmMistForecasting algorithmMistForecasting = new AlgorithmMistForecasting();
+    void getListExchangeRatesWithDays() {
+
+        AlgorithmMistForecasting algorithmMistForecasting = new AlgorithmMistForecasting(getListExchangeRates());
         List<ExchangeRates> exchangeRatesList = algorithmMistForecasting.getListExchangeRates(CurrencyType.USD,
                 LocalDate.now().plusDays(10));
-        assertEquals(exchangeRatesList.size(),1);
-        System.out.println(exchangeRatesList);
+        assertEquals(exchangeRatesList.size(), 1);
     }
 
     @Test
-    void testGetListExchangeRatesTest2() {
-        new Configurations();
-        AlgorithmMistForecasting algorithmMistForecasting = new AlgorithmMistForecasting();
+    void testGetListExchangeRatesWithPeriod() {
+        AlgorithmMistForecasting algorithmMistForecasting = new AlgorithmMistForecasting(getListExchangeRates());
         List<ExchangeRates> exchangeRatesList = algorithmMistForecasting.getListExchangeRates(CurrencyType.USD, 10);
-        assertEquals(exchangeRatesList.size(),10);
-        exchangeRatesList.stream().sorted(Comparator.comparing(ExchangeRates::getDate).reversed()).forEach(System.out::println);
-
+        assertEquals(exchangeRatesList.size(), 10);
     }
 
+    private LinkedList<ExchangeRates> getListExchangeRates() {
+        LinkedList<ExchangeRates> exchangeRates = new LinkedList<>();
+        int counter_day = 0;
+        for (int i = 10; i < 1000; i = i + 100) {
+            exchangeRates.add(new ExchangeRates(CurrencyType.USD, BigDecimal.valueOf(i), LocalDate.now().plusDays(counter_day).minusYears(1)));
+            exchangeRates.add(new ExchangeRates(CurrencyType.EUR, BigDecimal.valueOf(i), LocalDate.now().plusDays(counter_day).minusYears(1)));
+            counter_day++;
+        }
+        return exchangeRates;
+    }
 }

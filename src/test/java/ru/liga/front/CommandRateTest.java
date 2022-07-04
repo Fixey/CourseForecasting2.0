@@ -1,29 +1,28 @@
 package ru.liga.front;
 
 import org.junit.jupiter.api.Test;
+import ru.liga.back.AlgorithmSelector;
 import ru.liga.back.ExchangeRates;
 import ru.liga.enums.CurrencyType;
-import ru.liga.exception.SendMessageException;
-import ru.liga.telegram.Bot;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class OutputListTest {
+class CommandRateTest {
 
     @Test
-    void getSendMessageException() {
-        OutputList outputList = new OutputList();
-        assertThrows(SendMessageException.class, () -> {
-            outputList.sendToOut(Collections.singletonList(getDefaultData()), "3f", new Bot());
-        });
+    void getListExchangeRatesFromCommandRate() {
+        LinkedList<ExchangeRates> exchangeRates = getDefaultData();
+        CommandRate commandRate = new CommandRate(new AlgorithmSelector(exchangeRates));
+        List<List<ExchangeRates>> resultList = commandRate.invoke("rate usd,eur -period week -alg mist -output list");
+        assertEquals(resultList.size(), 2);
+        assertEquals(resultList.get(0).size(), 7);
     }
+
     private LinkedList<ExchangeRates> getDefaultData() {
         LinkedList<ExchangeRates> exchangeRates = new LinkedList<>();
         int counter_day = 0;

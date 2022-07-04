@@ -7,14 +7,19 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.LinkedList;
-
-import static ru.liga.back.Configurations.LIST_EXCHANGE_RATES;
+import java.util.List;
 
 /**
  * Алгоритм рассчета "Прошлогодний"
  */
 @Slf4j
-public class AlgorithmMoonForecasting implements RateAlgorithm {
+public class AlgorithmMoonForecasting implements IRateAlgorithm {
+    private List<ExchangeRates> exchangeRatesFromFiles;
+
+    public AlgorithmMoonForecasting(List<ExchangeRates> exchangeRatesFromFiles) {
+        this.exchangeRatesFromFiles = exchangeRatesFromFiles;
+    }
+
     /**
      * Алгоритм “Прошлогодний”.
      * Берёте курс за эту дату за прошлый год и показываете. Если на дату нет курса, то за предыдущие дни.
@@ -24,7 +29,6 @@ public class AlgorithmMoonForecasting implements RateAlgorithm {
      * @param period   на сколько дней рассчитывать
      * @return LinkedList<ExchangeRates> лист Курса валют
      */
-
     public LinkedList<ExchangeRates> getListExchangeRates(CurrencyType currency, Integer period) {
         log.debug("AlgorithmMoonForecasting.getListExchangeRates().args:");
         log.debug("currency = " + currency.name());
@@ -50,7 +54,7 @@ public class AlgorithmMoonForecasting implements RateAlgorithm {
         log.debug("AlgorithmMoonForecasting.getListExchangeRates().args:");
         log.debug("currency = " + currency.name());
         log.debug("date = " + date);
-        final BigDecimal rate = LIST_EXCHANGE_RATES.stream()
+        BigDecimal rate = exchangeRatesFromFiles.stream()
                 .filter(exchangeRates -> exchangeRates.getCurrency() == currency)
                 .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
                 .filter((x) -> x.getDate().compareTo(date.minusYears(1)) <= 0)

@@ -21,7 +21,6 @@ public class CommandSelector {
             case ("rate"):
                 return new CommandRate();
             default:
-                ;
                 throw new UnknownCommandException();
         }
     }

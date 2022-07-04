@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Алгоритм
  */
-public interface RateAlgorithm {
+public interface IRateAlgorithm {
     /**
      * Выполнение алгоритма и вывод результата
      *

@@ -5,6 +5,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.lang3.EnumUtils;
 import ru.liga.enums.AlgorithmType;
 import ru.liga.enums.CurrencyType;
+import ru.liga.enums.OutputCommandType;
 import ru.liga.enums.Period;
 import ru.liga.exception.*;
 
@@ -18,9 +19,14 @@ public class CommandRateValidation {
      * Проверка на корректное написание команды Rate
      *
      * @param cmd полная комманда
-     * @throws ArgumentCommandException падает при ошибке в кол-ве аргуметодов команды
-     * @throws CurrencyRateException    падает при отсутсвии такого курса
-     * @throws PeriodRateException      падает при непонятном периоде
+     * @throws EmptyCommandException                падает когда команда пустая
+     * @throws CurrencyRateException                падает при непонятном курсе
+     * @throws PeriodRequiredInRateCommandException падает при присутствии периода без отпут флага
+     * @throws PeriodOrDateRequiredException        падает при отсутствии периода или даты
+     * @throws DateRateException                    падает при отсутствии даты в enum
+     * @throws PeriodRateException                  падает при непонятном периоде
+     * @throws AlgorithmNotExistException           падает при непонятном алгоритме
+     * @throws OutputIsNotExistException            падает при непонятном output
      */
     public void ValidCmdCommandRate(@NonNull CommandLine cmd) {
         final String[] arrArgs = cmd.getArgs();
@@ -36,7 +42,7 @@ public class CommandRateValidation {
         if (cmd.hasOption("period") && !cmd.hasOption("output")) {
             throw new PeriodRequiredInRateCommandException();
         }
-        if (cmd.hasOption("date") && cmd.hasOption("period")) {
+        if (!cmd.hasOption("date") && !cmd.hasOption("period")) {
             throw new PeriodOrDateRequiredException();
         }
         if (cmd.hasOption("date")) {
@@ -54,6 +60,11 @@ public class CommandRateValidation {
         if (cmd.hasOption("alg")) {
             if (!EnumUtils.isValidEnumIgnoreCase(AlgorithmType.class, cmd.getOptionValue("alg"))) {
                 throw new AlgorithmNotExistException();
+            }
+        }
+        if (cmd.hasOption("output")) {
+            if (!EnumUtils.isValidEnumIgnoreCase(OutputCommandType.class, cmd.getOptionValue("output"))) {
+                throw new OutputIsNotExistException();
             }
         }
     }

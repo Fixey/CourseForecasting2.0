@@ -23,20 +23,22 @@
         </encoder>
     </appender>
 
+    <root lavel="debug">
+        <appender-ref ref="fileAppender"/>
+    </root>
+<!--    <logger  name="ru.liga" level="debug" additivity="false">-->
+<!--        <appender-ref ref="fileAppender"/>-->
+<!--        <appender-ref ref="consoleAppender"/>-->
+<!--    </logger>-->
+<!--    <logger name="ru.liga" level="ERROR" additivity="false">-->
+<!--        <appender-ref ref="consoleAppender"/>-->
+<!--        <appender-ref ref="fileAppender"/>-->
+<!--    </logger>-->
 
-    <logger  name="ru.liga" level="debug" additivity="false">
-        <appender-ref ref="fileAppender"/>
-        <appender-ref ref="consoleAppender"/>
-    </logger>
-    <logger name="ru.liga" level="ERROR" additivity="false">
-        <appender-ref ref="consoleAppender"/>
-        <appender-ref ref="fileAppender"/>
-    </logger>
-
-    <logger name="ru.liga" level="INFO" additivity="false">
-        <appender-ref ref="consoleAppender"/>
-        <appender-ref ref="fileAppender"/>
-    </logger>
+<!--    <logger name="ru.liga" level="INFO" additivity="false">-->
+<!--        <appender-ref ref="consoleAppender"/>-->
+<!--        <appender-ref ref="fileAppender"/>-->
+<!--    </logger>-->
 
 
 </configuration>

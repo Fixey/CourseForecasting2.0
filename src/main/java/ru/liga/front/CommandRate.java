@@ -5,7 +5,7 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.lang3.EnumUtils;
 import ru.liga.back.AlgorithmSelector;
 import ru.liga.back.ExchangeRates;
-import ru.liga.back.RateAlgorithm;
+import ru.liga.back.IRateAlgorithm;
 import ru.liga.enums.AlgorithmType;
 import ru.liga.enums.CurrencyType;
 import ru.liga.exception.CountDaysException;
@@ -22,6 +22,15 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class CommandRate implements Command {
+    private IAlgorithmSelector algorithmSelector;
+
+    public CommandRate() {
+        this.algorithmSelector = new AlgorithmSelector();
+    }
+
+    public CommandRate(IAlgorithmSelector algorithmSelector) {
+        this.algorithmSelector = algorithmSelector;
+    }
 
     /**
      * Запуск блока команд рассчитывающий курс на период
@@ -58,8 +67,7 @@ public class CommandRate implements Command {
         log.debug("algorithmName = " + algorithmName);
         log.debug("numDays = " + numDays);
         //Выбор алгоритма
-        RateAlgorithm algorithm = new AlgorithmSelector()
-                .getAlgorithm(EnumUtils.getEnumIgnoreCase(AlgorithmType.class, algorithmName));
+        IRateAlgorithm algorithm = algorithmSelector.getAlgorithm(EnumUtils.getEnumIgnoreCase(AlgorithmType.class, algorithmName));
         log.info("Choose algorithm = " + algorithm.getClass().getName());
         List<List<ExchangeRates>> listsExchangeRates = new ArrayList<>();
         for (CurrencyType currency : currencies) {

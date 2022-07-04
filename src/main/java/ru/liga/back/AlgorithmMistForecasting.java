@@ -10,14 +10,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static ru.liga.back.Configurations.LIST_EXCHANGE_RATES;
 import static ru.liga.constant.ConstantUtil.FORECASTING_MIST_NUM;
 
 /**
  * Алгоритм рассчета "Мистический"
  */
 @Slf4j
-public class AlgorithmMistForecasting implements RateAlgorithm {
+public class AlgorithmMistForecasting implements IRateAlgorithm {
+    private List<ExchangeRates> exchangeRatesFromFiles;
+
+    public AlgorithmMistForecasting(List<ExchangeRates> exchangeRatesFromFiles) {
+        this.exchangeRatesFromFiles = exchangeRatesFromFiles;
+    }
 
     /**
      * Алгоритм “Мистический”.
@@ -65,7 +69,7 @@ public class AlgorithmMistForecasting implements RateAlgorithm {
     }
 
     private List<ExchangeRates> getListForecastingRates(CurrencyType currency, LocalDate date) {
-        List<ExchangeRates> listExchangeRates = LIST_EXCHANGE_RATES.stream()
+        List<ExchangeRates> listExchangeRates = exchangeRatesFromFiles.stream()
                 .filter(exchangeRates -> exchangeRates.getCurrency().equals(currency))
                 .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
                 .limit(FORECASTING_MIST_NUM).collect(Collectors.toList());

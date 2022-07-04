@@ -15,7 +15,7 @@ import static ru.liga.back.Configurations.LIST_EXCHANGE_RATES;
 /**
  * Алгоритм рассчета "Мистический"
  */
-public class AlgorithmMistForecasting2 implements RateAlgorithm {
+public class AlgorithmMistForecasting2 implements IRateAlgorithm {
     private LinkedList<ExchangeRates> listExchangeRates = new LinkedList<>();
 
     /**
