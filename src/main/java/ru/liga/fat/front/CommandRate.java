@@ -73,7 +73,6 @@ public class CommandRate implements Command {
         log.info("Choose algorithm = " + algorithm.getClass().getName());
         RatesPrediction ratesPrediction = new RatesPrediction();
         for (CurrencyType currency : currencies) {
-            ratesPrediction.addCurrency(currency);
             if (period != null) {
                 ratesPrediction.addListExchangeRates(algorithm.getListExchangeRates(currency, numDays));
             } else {
