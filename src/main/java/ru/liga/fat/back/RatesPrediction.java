@@ -58,7 +58,7 @@ public class RatesPrediction {
         return this.listExchangeRates
                 .stream()
                 .filter(exchangeRates -> exchangeRates.getCurrency() == currency)
-                .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
+                .sorted(Comparator.comparing(ExchangeRates::getDate))
                 .map(ExchangeRates::getRate)
                 .collect(Collectors.toList());
     }

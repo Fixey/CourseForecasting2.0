@@ -67,17 +67,12 @@ public class AlgorithmMistForecasting implements IRateAlgorithm {
 
 
     private List<ExchangeRates> getListForecastingRates(CurrencyType currency, LocalDate date) {
-        List<ExchangeRates> listExchangeRates = exchangeRatesFromFiles.stream()
-                .filter(exchangeRates -> exchangeRates.getCurrency().equals(currency))
-                .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                .limit(FORECASTING_MIST_NUM).collect(Collectors.toList());
+        FilesStatement filesStatement = new FilesStatement();
+        List<ExchangeRates> listExchangeRates = filesStatement.getListExchangeRatesByCurrency(currency,
+                FORECASTING_MIST_NUM);
         LocalDate lastDateLineExchangeRate = listExchangeRates.get(0).getDate();
         while (!date.isEqual(lastDateLineExchangeRate)) {
-            List<BigDecimal> listRates = listExchangeRates.stream()
-                    .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                    .limit(FORECASTING_MIST_NUM)
-                    .map(ExchangeRates::getRate)
-                    .collect(Collectors.toList());
+            List<BigDecimal> listRates = filesStatement.getRatesByCurrent(currency, FORECASTING_MIST_NUM);
             Random rand = new Random();
             final int random_integer = rand.nextInt(listRates.size());
             BigDecimal rate = listRates.get(random_integer);

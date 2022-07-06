@@ -64,20 +64,17 @@ public class AlgorithmWebForecasting implements IRateAlgorithm {
     }
 
     private List<ExchangeRates> getListForecastingRates(CurrencyType currency, LocalDate date) {
-        final double[] arrRates = exchangeRatesFromFiles.stream()
-                .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                .limit(FORECASTING_WEB_NUM)
-                .map(ExchangeRates::getRate)
+        FilesStatement filesStatement = new FilesStatement();
+        final double[] arrRates = filesStatement.getRatesByCurrent(currency, FORECASTING_WEB_NUM)
+                .stream()
                 .mapToDouble(BigDecimal::doubleValue)
                 .toArray();
         final double[] rangeDays = IntStream.rangeClosed(1, FORECASTING_WEB_NUM)
                 .boxed()
                 .mapToDouble(i -> i)
                 .toArray();
-        List<ExchangeRates> listExchangeRates = exchangeRatesFromFiles.stream()
-                .filter(exchangeRates -> exchangeRates.getCurrency().equals(currency))
-                .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                .limit(FORECASTING_WEB_NUM).collect(Collectors.toList());
+        List<ExchangeRates> listExchangeRates = filesStatement.getListExchangeRatesByCurrency(currency,
+                FORECASTING_WEB_NUM);
         LocalDate lastDateLineExchangeRate = listExchangeRates.get(0).getDate();
         double dayCounter = 0.0;
         while (!date.isEqual(lastDateLineExchangeRate)) {

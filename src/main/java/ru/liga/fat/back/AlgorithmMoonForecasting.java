@@ -5,7 +5,6 @@ import ru.liga.fat.enums.CurrencyType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,11 +33,9 @@ public class AlgorithmMoonForecasting implements IRateAlgorithm {
         log.debug("AlgorithmMoonForecasting.getListExchangeRates().args:");
         log.debug("currency = " + currency.name());
         log.debug("date = " + date);
-        BigDecimal rate = exchangeRatesFromFiles.stream()
-                .filter(exchangeRates -> exchangeRates.getCurrency() == currency)
-                .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
-                .filter((x) -> x.getDate().compareTo(date.minusYears(1)) <= 0)
-                .findFirst().map(ExchangeRates::getRate).get();
+        FilesStatement filesStatement = new FilesStatement();
+        BigDecimal rate = filesStatement.getRatesBuCurrencyWithFilter(currency,
+                exchangeRates -> exchangeRates.getDate().compareTo(date.minusYears(1)) <= 0);
         List<ExchangeRates> listExchangeRatesRes = new LinkedList<>();
         listExchangeRatesRes.add(new ExchangeRates(currency, rate, date));
         return listExchangeRatesRes;
