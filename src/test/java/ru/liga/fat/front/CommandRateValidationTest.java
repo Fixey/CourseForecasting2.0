@@ -22,7 +22,7 @@ class CommandRateValidationTest {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         CommandRateValidation commandRateValidation = new CommandRateValidation();
         assertThrows(OutputIsNotExistException.class, () -> {
-            commandRateValidation.ValidCmdCommandRate(cmd);
+            commandRateValidation.validCmdCommandRate(cmd);
         });
     }
     @Test
@@ -31,7 +31,7 @@ class CommandRateValidationTest {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         CommandRateValidation commandRateValidation = new CommandRateValidation();
         assertThrows(AlgorithmNotExistException.class, () -> {
-            commandRateValidation.ValidCmdCommandRate(cmd);
+            commandRateValidation.validCmdCommandRate(cmd);
         });
     }
     @Test
@@ -40,7 +40,7 @@ class CommandRateValidationTest {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         CommandRateValidation commandRateValidation = new CommandRateValidation();
         assertThrows(PeriodRateException.class, () -> {
-            commandRateValidation.ValidCmdCommandRate(cmd);
+            commandRateValidation.validCmdCommandRate(cmd);
         });
     }
     @Test
@@ -49,7 +49,7 @@ class CommandRateValidationTest {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         CommandRateValidation commandRateValidation = new CommandRateValidation();
         assertThrows(DateRateException.class, () -> {
-            commandRateValidation.ValidCmdCommandRate(cmd);
+            commandRateValidation.validCmdCommandRate(cmd);
         });
     }
     @Test
@@ -58,7 +58,7 @@ class CommandRateValidationTest {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         CommandRateValidation commandRateValidation = new CommandRateValidation();
         assertThrows(PeriodOrDateRequiredException.class, () -> {
-            commandRateValidation.ValidCmdCommandRate(cmd);
+            commandRateValidation.validCmdCommandRate(cmd);
         });
     }
     @Test
@@ -67,7 +67,7 @@ class CommandRateValidationTest {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         CommandRateValidation commandRateValidation = new CommandRateValidation();
         assertThrows(PeriodRequiredInRateCommandException.class, () -> {
-            commandRateValidation.ValidCmdCommandRate(cmd);
+            commandRateValidation.validCmdCommandRate(cmd);
         });
     }
     @Test
@@ -76,7 +76,7 @@ class CommandRateValidationTest {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         CommandRateValidation commandRateValidation = new CommandRateValidation();
         assertThrows(CurrencyRateException.class, () -> {
-            commandRateValidation.ValidCmdCommandRate(cmd);
+            commandRateValidation.validCmdCommandRate(cmd);
         });
     }
 }

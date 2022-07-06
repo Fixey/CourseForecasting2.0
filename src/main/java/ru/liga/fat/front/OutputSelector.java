@@ -1,5 +1,6 @@
 package ru.liga.fat.front;
 
+import ru.liga.fat.enums.OutputCommandType;
 import ru.liga.fat.exception.UnknownCommandException;
 
 /**
@@ -12,14 +13,13 @@ public class OutputSelector {
      * @param output название output
      * @return IOutputRateCommander класс в котором будет выполняться обработка
      */
-    public IOutputRateCommander getOutput(String output) {
+    public IOutputRateCommander getOutput(OutputCommandType output) {
         switch (output) {
-            case ("list"):
+            case list:
                 return new OutputList();
-            case ("graph"):
+            case graph:
                 return new OutputGraph();
-            default:
-                throw new UnknownCommandException();
         }
+        throw new UnknownCommandException();
     }
 }

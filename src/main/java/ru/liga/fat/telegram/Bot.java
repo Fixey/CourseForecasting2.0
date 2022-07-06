@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.liga.fat.enums.OutputCommandType;
 import ru.liga.fat.exception.ArgumentsOptionFormatterException;
 import ru.liga.fat.exception.SendMessageException;
 import ru.liga.fat.front.CommandHandler;
@@ -71,7 +72,7 @@ public final class Bot extends TelegramLongPollingBot {
                 CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(messageText);
                 log.debug("CMD=" + Arrays.toString(cmd.getArgs()));
                 if (cmd.hasOption("output")) {
-                    IOutputRateCommander outputRateCommander = new OutputSelector().getOutput(cmd.getOptionValue("output"));
+                    IOutputRateCommander outputRateCommander = new OutputSelector().getOutput(OutputCommandType.valueOf(cmd.getOptionValue("output")));
                     log.debug("outputRateCommander = " + outputRateCommander.getClass().getName());
                     outputRateCommander.sendToOut(listResult, chatId, this);
                 }

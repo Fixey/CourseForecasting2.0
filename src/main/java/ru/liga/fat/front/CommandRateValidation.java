@@ -28,7 +28,7 @@ public class CommandRateValidation {
      * @throws AlgorithmNotExistException           падает при непонятном алгоритме
      * @throws OutputIsNotExistException            падает при непонятном output
      */
-    public void ValidCmdCommandRate(@NonNull CommandLine cmd) {
+    public void validCmdCommandRate(@NonNull CommandLine cmd) {
         final String[] arrArgs = cmd.getArgs();
         if (arrArgs.length == 0) {
             throw new EmptyCommandException();

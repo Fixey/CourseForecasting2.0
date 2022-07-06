@@ -23,28 +23,43 @@ import static ru.liga.fat.constant.ConstantUtil.CURRENCY_MAP;
 @Slf4j
 public class Configurations {
     private static Configurations _instance = null;
-    public static List<ExchangeRates> LIST_EXCHANGE_RATES = new LinkedList<>();
+    private List<ExchangeRates> listExchangeRatesFromFile = new LinkedList<>();
 
     public Configurations() {
-        log.info("Reads files");
-        LIST_EXCHANGE_RATES = new LinkedList<ExchangeRates>();
-        try {
-            for (CurrencyType currency : CurrencyType.values()) {
-                FileReader fileReader = new FileReader();
-                List<String> listLines = fileReader.getListLinesFromFile("/csv/" + currency.name() + ".csv");
-                LIST_EXCHANGE_RATES.addAll(getExchangeRatesList(listLines));
-            }
-            log.info("Read files successfully");
-        } catch (Exception e) {
-            log.error("Configurations: " + e.getMessage(), e);
-            throw new FailReadFile();
-        }
     }
 
-    public synchronized static Configurations getInstance() {
-        if (_instance == null)
+    /**
+     * Инициализация
+     *
+     * @return Configurations
+     */
+    public synchronized static Configurations init() {
+        if (_instance == null) {
+            log.info("Reads files");
             _instance = new Configurations();
+            _instance.listExchangeRatesFromFile = new LinkedList<ExchangeRates>();
+            try {
+                for (CurrencyType currency : CurrencyType.values()) {
+                    FileReader fileReader = new FileReader();
+                    List<String> listLines = fileReader.getListLinesFromFile("/csv/" + currency.name() + ".csv");
+                    _instance.listExchangeRatesFromFile.addAll(_instance.getExchangeRatesList(listLines));
+                }
+                log.info("Read files successfully");
+            } catch (Exception e) {
+                log.error("Configurations: " + e.getMessage(), e);
+                throw new FailReadFile();
+            }
+        }
         return _instance;
+    }
+
+    /**
+     * Возвращает список курсов
+     *
+     * @return List<ExchangeRates> список курсов
+     */
+    public List<ExchangeRates> getListExchangeRatesFromFile() {
+        return _instance.listExchangeRatesFromFile;
     }
 
     private List<ExchangeRates> getExchangeRatesList(List<String> listLines) {

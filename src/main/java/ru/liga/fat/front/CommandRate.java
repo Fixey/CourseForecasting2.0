@@ -8,7 +8,6 @@ import ru.liga.fat.back.ExchangeRates;
 import ru.liga.fat.back.IRateAlgorithm;
 import ru.liga.fat.enums.AlgorithmType;
 import ru.liga.fat.enums.CurrencyType;
-import ru.liga.fat.enums.Period;
 import ru.liga.fat.exception.CountDaysException;
 import ru.liga.fat.util.PeriodUtils;
 
@@ -45,7 +44,7 @@ public class CommandRate implements Command {
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         //Валидация
         log.debug("Start command validation");
-        new CommandRateValidation().ValidCmdCommandRate(cmd);//Проверим корректное написание команды
+        new CommandRateValidation().validCmdCommandRate(cmd);//Проверим корректное написание команды
         log.debug("Validation was successes");
         //Декларация переменных
         List<CurrencyType> currencies = Arrays.stream(cmd.getArgs()[1].split(",")).map(x -> EnumUtils.getEnumIgnoreCase(CurrencyType.class, x)).collect(Collectors.toList());

@@ -15,7 +15,7 @@ public class Main {
     @SneakyThrows
     public static void main(String[] args) {
         log.info("Start Bot");
-        new Configurations();
+        Configurations.init();
         String botToken = System.getenv("BOT_FORECASTING_TOKEN");
         String botName = System.getenv("BOT_FORECASTING_NAME");
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);

@@ -7,16 +7,14 @@ import ru.liga.fat.front.IAlgorithmSelector;
 import java.util.LinkedList;
 import java.util.List;
 
-import static ru.liga.fat.back.Configurations.LIST_EXCHANGE_RATES;
-
 /**
  * Выбор алгоритма
  */
 public class AlgorithmSelector implements IAlgorithmSelector {
-    private List<ExchangeRates> listExchangeRates;
+    final private List<ExchangeRates> listExchangeRates;
 
     public AlgorithmSelector() {
-        this.listExchangeRates = LIST_EXCHANGE_RATES;
+        this.listExchangeRates = Configurations.init().getListExchangeRatesFromFile();
     }
 
     public AlgorithmSelector(LinkedList<ExchangeRates> listExchangeRates) {
@@ -31,12 +29,12 @@ public class AlgorithmSelector implements IAlgorithmSelector {
      * @throws UnknownAlgorithmException падает если не существует такого алгоритма
      */
     public IRateAlgorithm getAlgorithm(AlgorithmType algorithmName) {
-        switch (algorithmName.name()) {
-            case "moon":
+        switch (algorithmName) {
+            case moon:
                 return new AlgorithmMoonForecasting(listExchangeRates);
-            case "mist":
+            case mist:
                 return new AlgorithmMistForecasting(listExchangeRates);
-            case "web":
+            case web:
                 return new AlgorithmWebForecasting(listExchangeRates);
         }
         throw new UnknownAlgorithmException();
