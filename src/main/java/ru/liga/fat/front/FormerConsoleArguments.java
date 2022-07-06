@@ -24,7 +24,7 @@ public class FormerConsoleArguments {
             return parser.parse(options, commandParts);
         } catch (ParseException pe) {
             log.error(pe.getMessage());
-            throw new ArgumentsOptionFormatterException();
+            throw new ArgumentsOptionFormatterException(pe);
         }
     }
 }

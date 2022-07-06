@@ -18,6 +18,9 @@ public class ConsoleParser {
         try {
             final String[] arrParams = args.trim().split("\\s+");
             final CommandsType command = EnumUtils.getEnumIgnoreCase(CommandsType.class,arrParams[0].toLowerCase());
+            if(command==null){
+                throw new ConsoleArgsException();
+            }
             return new Console(command, args);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             log.error(e.getMessage(), e);
