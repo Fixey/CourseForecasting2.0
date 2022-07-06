@@ -3,9 +3,7 @@ package ru.liga.fat.front;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import ru.liga.fat.back.ExchangeRates;
-
-import java.util.List;
+import ru.liga.fat.back.RatesPrediction;
 
 /**
  * Объект консоль
@@ -20,9 +18,10 @@ public class Console {
 
     /**
      * Обработка команды
-     * @return List<List<ExchangeRates>> результат выполнения команды
+     *
+     * @return RatesPrediction результат выполнения команды
      */
-    public List<List<ExchangeRates>> invokeCommand() {
+    public RatesPrediction invokeCommand() {
         Command command = new CommandSelector().getCommand(commandName);
         log.debug("Console = " + command.getClass().getName());
         log.info("CommandName = " + commandName);

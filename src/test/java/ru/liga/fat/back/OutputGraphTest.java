@@ -21,10 +21,10 @@ class OutputGraphTest {
         String botToken = System.getenv("BOT_FORECASTING_TOKEN");
         String botName = System.getenv("BOT_FORECASTING_NAME");
         assertThrows(SendMessageException.class, () -> {
-            outputGraph.sendToOut(Collections.singletonList(getDefaultData()), "3f", new Bot(botToken,botName));
+            outputGraph.sendToOut(getDefaultData(), "3f", new Bot(botToken,botName));
         });
     }
-    private LinkedList<ExchangeRates> getDefaultData() {
+    private RatesPrediction getDefaultData() {
         LinkedList<ExchangeRates> exchangeRates = new LinkedList<>();
         int counter_day = 0;
         for (int i = 10; i < 1000; i = i + 100) {
@@ -32,6 +32,8 @@ class OutputGraphTest {
             exchangeRates.add(new ExchangeRates(CurrencyType.EUR, BigDecimal.valueOf(i), LocalDate.now().plusDays(counter_day).minusYears(1)));
             counter_day++;
         }
-        return exchangeRates;
+        RatesPrediction ratesPrediction = new RatesPrediction();
+        ratesPrediction.addListExchangeRates(exchangeRates);
+        return ratesPrediction;
     }
 }

@@ -2,6 +2,8 @@ package ru.liga.fat.front;
 
 
 import ru.liga.fat.back.ExchangeRates;
+import ru.liga.fat.back.RatesPrediction;
+import ru.liga.fat.enums.CurrencyType;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,12 +19,12 @@ public class CommandHelp implements Command {
      * @return List<List<ExchangeRates>> списки курсов
      */
     @Override
-    public List<List<ExchangeRates>> invoke(String listArgs) {
+    public RatesPrediction invoke(String listArgs) {
         LinkedList listCommands = new LinkedList();
         listCommands.add("Options:");
         listCommands.add("Rate <eur, usd, try> <today, tomorrow, week, month, dd/MM/yyyy>         Print Rate during period");
         listCommands.add("help                                                                  Print commands for this app");
         listCommands.add("exit                                                                    Exit from app");
-        return listCommands;
+        return null;
     }
 }

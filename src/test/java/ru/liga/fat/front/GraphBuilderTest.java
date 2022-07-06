@@ -3,6 +3,7 @@ package ru.liga.fat.front;
 import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 import org.junit.jupiter.api.Test;
 import ru.liga.fat.back.ExchangeRates;
+import ru.liga.fat.back.RatesPrediction;
 import ru.liga.fat.enums.CurrencyType;
 
 import java.io.File;
@@ -23,16 +24,16 @@ class GraphBuilderTest {
         this.getClass().getClassLoader().getResource("graph.png");
     }
 
-    private List<List<ExchangeRates>> getDefaultData() {
+    private RatesPrediction getDefaultData() {
         List<ExchangeRates> exchangeRatesList = new LinkedList<>();
         List<ExchangeRates> exchangeRatesList2 = new LinkedList<>();
         exchangeRatesList.add(new ExchangeRates(CurrencyType.USD, BigDecimal.valueOf(10), LocalDate.now()));
         exchangeRatesList.add(new ExchangeRates(CurrencyType.USD, BigDecimal.valueOf(150), LocalDate.now()));
         exchangeRatesList2.add(new ExchangeRates(CurrencyType.EUR, BigDecimal.valueOf(70), LocalDate.now()));
         exchangeRatesList2.add(new ExchangeRates(CurrencyType.EUR, BigDecimal.valueOf(200), LocalDate.now()));
-        List<List<ExchangeRates>> listResult = new LinkedList<>();
-        listResult.add(exchangeRatesList);
-        listResult.add(exchangeRatesList2);
-        return listResult;
+        RatesPrediction ratesPrediction = new RatesPrediction();
+        ratesPrediction.addListExchangeRates(exchangeRatesList);
+        ratesPrediction.addListExchangeRates(exchangeRatesList2);
+        return ratesPrediction;
     }
 }

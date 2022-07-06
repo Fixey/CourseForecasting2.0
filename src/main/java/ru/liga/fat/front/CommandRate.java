@@ -6,6 +6,7 @@ import org.apache.commons.lang3.EnumUtils;
 import ru.liga.fat.back.AlgorithmSelector;
 import ru.liga.fat.back.ExchangeRates;
 import ru.liga.fat.back.IRateAlgorithm;
+import ru.liga.fat.back.RatesPrediction;
 import ru.liga.fat.enums.AlgorithmType;
 import ru.liga.fat.enums.CurrencyType;
 import ru.liga.fat.exception.CountDaysException;
@@ -36,10 +37,10 @@ public class CommandRate implements Command {
      * Запуск блока команд рассчитывающий курс на период
      *
      * @param fullCommand полная комманда
-     * @return List<List<ExchangeRates>> листы курсов
+     * @return RatesPrediction предсказанные курсы
      * @throws CountDaysException при не возможности подсчитать кол-во дней
      */
-    public List<List<ExchangeRates>> invoke(String fullCommand) {
+    public RatesPrediction invoke(String fullCommand) {
         log.info("Invoked " + this.getClass().getName());
         CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(fullCommand);
         //Валидация
@@ -70,14 +71,15 @@ public class CommandRate implements Command {
         //Выбор алгоритма
         IRateAlgorithm algorithm = algorithmSelector.getAlgorithm(EnumUtils.getEnumIgnoreCase(AlgorithmType.class, algorithmName));
         log.info("Choose algorithm = " + algorithm.getClass().getName());
-        List<List<ExchangeRates>> listsExchangeRates = new ArrayList<>();
+        RatesPrediction ratesPrediction = new RatesPrediction();
         for (CurrencyType currency : currencies) {
+            ratesPrediction.addCurrency(currency);
             if (period != null) {
-                listsExchangeRates.add(algorithm.getListExchangeRates(currency, numDays));
+                ratesPrediction.addListExchangeRates(algorithm.getListExchangeRates(currency, numDays));
             } else {
-                listsExchangeRates.add(algorithm.getListExchangeRates(currency, lDate));
+                ratesPrediction.addListExchangeRates(algorithm.getListExchangeRates(currency, lDate));
             }
         }
-        return listsExchangeRates;
+        return ratesPrediction;
     }
 }

@@ -4,11 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.liga.fat.back.ExchangeRates;
+import ru.liga.fat.back.RatesPrediction;
+import ru.liga.fat.enums.CurrencyType;
 import ru.liga.fat.exception.SendMessageException;
 import ru.liga.fat.telegram.Bot;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -17,26 +17,27 @@ public class OutputList implements IOutputRateCommander {
      * Обработка output
      * Распечатывание результата
      *
-     * @param listsExchangeRates списки курсов
-     * @param chatId             Id чата
-     * @param bot                инстанс бота
+     * @param ratesPrediction списки курсов
+     * @param chatId          Id чата
+     * @param bot             инстанс бота
      * @throws SendMessageException ошибка при отправке сообщения
      */
     @Override
-    public void sendToOut(List<List<ExchangeRates>> listsExchangeRates, String chatId, Bot bot) {
+    public void sendToOut(RatesPrediction ratesPrediction, String chatId, Bot bot) {
         log.debug("OutputList args:");
-        log.debug("listsExchangeRates =" + listsExchangeRates.toString());
+        log.debug("listExchangeRates =" + ratesPrediction.getListExchangeRates());
         log.debug("chatId =" + chatId);
-        for (List<ExchangeRates> listExchangeRates : listsExchangeRates) {
-            String messageText = listExchangeRates.stream().findFirst().get().getCurrency().toString() + "\n";
-            messageText += listExchangeRates.stream()
-                    .sorted(Comparator.comparing(ExchangeRates::getCurrency).thenComparing(ExchangeRates::getDate).reversed())
-                    .map(ExchangeRates::getInfo).collect(Collectors.joining("\n"));
-            SendMessage sendMessage = SendMessage.builder()
-                    .chatId(chatId)
-                    .text(messageText)
-                    .build();
+        for (CurrencyType currency : ratesPrediction.getCurrencies()) {
             try {
+                String messageText = currency.name() + ":\n";
+                messageText += ratesPrediction.getExchangeRatesByCurrency(currency)
+                        .stream()
+                        .map(ExchangeRates::getInfo)
+                        .collect(Collectors.joining("\n"));
+                SendMessage sendMessage = SendMessage.builder()
+                        .chatId(chatId)
+                        .text(messageText)
+                        .build();
                 bot.execute(sendMessage);
                 log.info("Send list to client");
 

@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.liga.fat.back.RatesPrediction;
 import ru.liga.fat.enums.OutputCommandType;
 import ru.liga.fat.exception.ArgumentsOptionFormatterException;
 import ru.liga.fat.exception.SendMessageException;
@@ -16,7 +17,6 @@ import ru.liga.fat.front.IOutputRateCommander;
 import ru.liga.fat.front.OutputSelector;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Бот предсказывающий курс
@@ -47,10 +47,10 @@ public final class Bot extends TelegramLongPollingBot {
             String messageText = message.getText();
             String chatId = message.getChatId().toString();
             log.info(String.format("MessageText = %s,ChatId = %s", messageText, chatId));
-            List listResult;
+            RatesPrediction ratesPrediction = new RatesPrediction();
             try {
-                listResult = new CommandHandler().consoleEngine(messageText);
-                log.debug("Result Algorithm: " + listResult.toString());
+                ratesPrediction = new CommandHandler().invokeCommandFromConsole(messageText);
+                log.debug("Result Algorithm: " + ratesPrediction.toString());
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
                 SendMessage sendMessage = SendMessage.builder()
@@ -63,8 +63,6 @@ public final class Bot extends TelegramLongPollingBot {
                     log.error(e.getMessage(), e);
                     throw new SendMessageException();
                 }
-                log.error(e.getMessage(), e);
-                throw new SendMessageException();
             }
             //Выбор обработки результата алгоритма предсказаний
             try {
@@ -74,7 +72,7 @@ public final class Bot extends TelegramLongPollingBot {
                 if (cmd.hasOption("output")) {
                     IOutputRateCommander outputRateCommander = new OutputSelector().getOutput(OutputCommandType.valueOf(cmd.getOptionValue("output")));
                     log.debug("outputRateCommander = " + outputRateCommander.getClass().getName());
-                    outputRateCommander.sendToOut(listResult, chatId, this);
+                    outputRateCommander.sendToOut(ratesPrediction, chatId, this);
                 }
             } catch (RuntimeException e) {
                 log.error(e.getMessage(), e);

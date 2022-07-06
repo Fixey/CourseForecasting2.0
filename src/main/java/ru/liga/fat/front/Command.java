@@ -1,6 +1,7 @@
 package ru.liga.fat.front;
 
 import ru.liga.fat.back.ExchangeRates;
+import ru.liga.fat.back.RatesPrediction;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ interface Command {
      * @param fullCommand полная команда
      * @return List<List<ExchangeRates>> списки курсов
      */
-    List<List<ExchangeRates>> invoke(String fullCommand);
+    RatesPrediction invoke(String fullCommand);
 }
