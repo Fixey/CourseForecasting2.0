@@ -8,7 +8,6 @@ import ru.liga.fat.telegram.Bot;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,9 +20,10 @@ class OutputGraphTest {
         String botToken = System.getenv("BOT_FORECASTING_TOKEN");
         String botName = System.getenv("BOT_FORECASTING_NAME");
         assertThrows(SendMessageException.class, () -> {
-            outputGraph.sendToOut(getDefaultData(), "3f", new Bot(botToken,botName));
+            outputGraph.sendToOut(getDefaultData(), "3f", new Bot(botToken, botName));
         });
     }
+
     private RatesPrediction getDefaultData() {
         LinkedList<ExchangeRates> exchangeRates = new LinkedList<>();
         int counter_day = 0;

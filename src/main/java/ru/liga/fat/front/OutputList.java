@@ -40,7 +40,6 @@ public class OutputList implements IOutputRateCommander {
                         .build();
                 bot.execute(sendMessage);
                 log.info("Send list to client");
-
             } catch (TelegramApiException e) {
                 log.error(e.getMessage(), e);
                 throw new SendMessageException();

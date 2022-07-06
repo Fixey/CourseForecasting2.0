@@ -20,10 +20,6 @@ class AlgorithmWebForecastingTest {
         assertEquals(exchangeRatesList.size(), 1);
     }
 
-    @Test
-    void testGetListExchangeRates() {
-    }
-
     private LinkedList<ExchangeRates> getDefaultData() {
         LinkedList<ExchangeRates> exchangeRates = new LinkedList<>();
         int counter_day = 0;

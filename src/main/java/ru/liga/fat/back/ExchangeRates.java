@@ -31,7 +31,6 @@ final public class ExchangeRates {
      */
     public String getInfo() {
         final String srtDate = DATE_TIME_FORMATTER.format(date);
-
         return Character.toUpperCase(srtDate.charAt(0)) + srtDate.substring(1) + " - "
                 + String.format("%.2f", rate);
     }

@@ -16,7 +16,6 @@ class AlgorithmMistForecastingTest {
 
     @Test
     void getListExchangeRatesWithDays() {
-
         AlgorithmMistForecasting algorithmMistForecasting = new AlgorithmMistForecasting(getDefaultData());
         List<ExchangeRates> exchangeRatesList = algorithmMistForecasting.getListExchangeRates(CurrencyType.USD,
                 LocalDate.now().plusDays(10));

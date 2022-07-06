@@ -1,12 +1,9 @@
 package ru.liga.fat.front;
 
 
-import ru.liga.fat.back.ExchangeRates;
 import ru.liga.fat.back.RatesPrediction;
-import ru.liga.fat.enums.CurrencyType;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Класс отвечающий за действия по команде Help
@@ -15,8 +12,9 @@ public class CommandHelp implements Command {
 
     /**
      * Распечатывает список команд прогарммы
+     *
      * @param listArgs полная команда
-     * @return List<List<ExchangeRates>> списки курсов
+     * @return List<List < ExchangeRates>> списки курсов
      */
     @Override
     public RatesPrediction invoke(String listArgs) {

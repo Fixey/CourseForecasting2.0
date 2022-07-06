@@ -3,6 +3,7 @@ package ru.liga.fat.front;
 import org.junit.jupiter.api.Test;
 import ru.liga.fat.back.AlgorithmSelector;
 import ru.liga.fat.back.ExchangeRates;
+import ru.liga.fat.back.RatesPrediction;
 import ru.liga.fat.enums.CurrencyType;
 
 import java.math.BigDecimal;
@@ -18,9 +19,8 @@ class CommandRateTest {
     void getListExchangeRatesFromCommandRate() {
         LinkedList<ExchangeRates> exchangeRates = getDefaultData();
         CommandRate commandRate = new CommandRate(new AlgorithmSelector(exchangeRates));
-        List<List<ExchangeRates>> resultList = commandRate.invoke("rate usd,eur -period week -alg mist -output list");
-        assertEquals(resultList.size(), 2);
-        assertEquals(resultList.get(0).size(), 7);
+        RatesPrediction ratesPrediction = commandRate.invoke("rate usd,eur -period week -alg mist -output list");
+        assertEquals(ratesPrediction.currencies.size(), 2);
     }
 
     private LinkedList<ExchangeRates> getDefaultData() {

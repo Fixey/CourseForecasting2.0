@@ -10,7 +10,6 @@ import ru.liga.fat.exception.ConsoleException;
 @Slf4j
 public class CommandHandler {
     /**
-     *
      * @param command комманда
      * @return RatesPrediction результат команды
      * @throws ConsoleException ошибка если что-то случилось при выполнении команды

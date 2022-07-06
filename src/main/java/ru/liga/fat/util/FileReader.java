@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
+
 @Slf4j
 public class FileReader {
     /**
@@ -29,7 +30,7 @@ public class FileReader {
             }
             return listLines;
         } catch (IOException | NullPointerException e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
             throw new FailFileException();
         }
     }

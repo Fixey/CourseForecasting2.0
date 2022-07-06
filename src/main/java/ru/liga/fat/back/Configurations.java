@@ -77,7 +77,6 @@ public class Configurations {
                 }
                 String currencyName = aliasCurrency.get(currency);
                 BigDecimal bigDecimalRate = BigDecimal.valueOf(Double.parseDouble(rate.trim().substring(0, rate.length() - 1).replace(",", ".")));
-
                 listExchangeRates.add(new ExchangeRates(EnumUtils.getEnumIgnoreCase(CurrencyType.class, currencyName), bigDecimalRate, localDate));
             }
             return listExchangeRates;

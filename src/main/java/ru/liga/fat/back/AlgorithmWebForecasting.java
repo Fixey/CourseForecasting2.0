@@ -36,7 +36,6 @@ public class AlgorithmWebForecasting implements IRateAlgorithm {
         log.debug("currency = " + currency.name());
         log.debug("date = " + date);
         List<ExchangeRates> listExchangeRate = getListForecastingRates(currency, date);
-
         return listExchangeRate.
                 stream()
                 .max(Comparator.comparing(ExchangeRates::getDate))
@@ -58,7 +57,6 @@ public class AlgorithmWebForecasting implements IRateAlgorithm {
         log.debug("period = " + period);
         LocalDate localDate = LocalDate.now().plusDays(period);
         List<ExchangeRates> listExchangeRate = getListForecastingRates(currency, localDate);
-
         return listExchangeRate.stream()
                 .sorted(Comparator.comparing(ExchangeRates::getDate).reversed())
                 .limit(period)

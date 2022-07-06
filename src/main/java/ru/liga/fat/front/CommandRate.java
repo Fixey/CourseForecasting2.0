@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.lang3.EnumUtils;
 import ru.liga.fat.back.AlgorithmSelector;
-import ru.liga.fat.back.ExchangeRates;
 import ru.liga.fat.back.IRateAlgorithm;
 import ru.liga.fat.back.RatesPrediction;
 import ru.liga.fat.enums.AlgorithmType;
@@ -13,7 +12,6 @@ import ru.liga.fat.exception.CountDaysException;
 import ru.liga.fat.util.PeriodUtils;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

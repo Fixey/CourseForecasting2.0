@@ -23,8 +23,8 @@ public class OutputGraph implements IOutputRateCommander {
      * Вывод графика
      *
      * @param ratesPrediction название output
-     * @param chatId             Id чата
-     * @param bot                инстанс бота
+     * @param chatId          Id чата
+     * @param bot             инстанс бота
      * @throws SendMessageException ошибка при отправке сообщения
      */
     @SneakyThrows

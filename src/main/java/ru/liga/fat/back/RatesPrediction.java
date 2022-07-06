@@ -18,6 +18,7 @@ public class RatesPrediction {
      * Курсы которые есть в listExchangeRates
      */
     public List<CurrencyType> currencies = new LinkedList<>();
+
     /**
      * Лист всех предсказаных курсов
      */
@@ -36,15 +37,6 @@ public class RatesPrediction {
                 .distinct()
                 .collect(Collectors.toList());
         this.addCurrency(currencyTypes);
-    }
-
-    /**
-     * Добавить в список ставок курс
-     *
-     * @param currency currency курс
-     */
-    public void addCurrency(CurrencyType currency) {
-        this.currencies.add(currency);
     }
 
     /**

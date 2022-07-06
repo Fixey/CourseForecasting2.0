@@ -19,7 +19,7 @@ public class Main {
         String botToken = System.getenv("BOT_FORECASTING_TOKEN");
         String botName = System.getenv("BOT_FORECASTING_NAME");
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-        telegramBotsApi.registerBot(new Bot(botToken,botName));
+        telegramBotsApi.registerBot(new Bot(botToken, botName));
     }
 }
 
