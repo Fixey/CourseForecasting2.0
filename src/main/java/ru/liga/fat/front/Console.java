@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import ru.liga.fat.back.RatesPrediction;
+import ru.liga.fat.enums.CommandsType;
 
 /**
  * Объект консоль
@@ -13,7 +14,7 @@ import ru.liga.fat.back.RatesPrediction;
 @Slf4j
 public class Console {
 
-    public String commandName;
+    public CommandsType commandName;
     public String fullCommand;
 
     /**

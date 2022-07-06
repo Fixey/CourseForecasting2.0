@@ -8,7 +8,7 @@ import ru.liga.fat.back.RatesPrediction;
 interface Command {
     /**
      * @param fullCommand полная команда
-     * @return List<List < ExchangeRates>> списки курсов
+     * @return RatesPrediction списки курсов
      */
     RatesPrediction invoke(String fullCommand);
 }

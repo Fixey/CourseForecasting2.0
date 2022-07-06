@@ -1,6 +1,7 @@
 package ru.liga.fat.front;
 
 import lombok.extern.slf4j.Slf4j;
+import ru.liga.fat.enums.CommandsType;
 import ru.liga.fat.exception.UnknownCommandException;
 
 /**
@@ -14,11 +15,11 @@ public class CommandSelector {
      * @param command название команды
      * @return Возвращает объект Command
      */
-    public Command getCommand(String command) {
-        switch (command.toLowerCase()) {
-            case ("help"):
+    public Command getCommand(CommandsType command) {
+        switch (command) {
+            case help:
                 return new CommandHelp();
-            case ("rate"):
+            case rate:
                 return new CommandRate();
             default:
                 throw new UnknownCommandException();

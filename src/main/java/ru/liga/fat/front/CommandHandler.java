@@ -19,7 +19,7 @@ public class CommandHandler {
             log.debug("Start");
             ConsoleParser consoleParser = new ConsoleParser();
             Console console = consoleParser.consoleParser(command);
-            log.debug("Console=" + console.getCommandName());
+            log.debug("Console=" + console.getCommandName().name());
             log.debug("Console Command=" + console.getFullCommand());
             return console.invokeCommand();
         } catch (Exception e) {
