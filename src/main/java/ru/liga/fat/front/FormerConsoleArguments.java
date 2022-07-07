@@ -4,10 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.*;
 import ru.liga.fat.exception.ArgumentsOptionFormatterException;
 
-@Slf4j
+
 /**
  * Формирование командной строки
  */
+@Slf4j
 public class FormerConsoleArguments {
     /**
      * @param fullCommand команда

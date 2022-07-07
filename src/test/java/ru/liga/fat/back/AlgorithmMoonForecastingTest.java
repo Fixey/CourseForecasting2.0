@@ -17,8 +17,7 @@ class AlgorithmMoonForecastingTest {
         AlgorithmMoonForecasting algorithmMoonForecasting = new AlgorithmMoonForecasting(getDefaultData());
         List<ExchangeRates> exchangeRates = algorithmMoonForecasting.getListExchangeRates(CurrencyType.USD, 7);
         assertEquals(exchangeRates.size(), 7);
-        assertEquals(exchangeRates.get(0).getRate(), BigDecimal.valueOf(110));
-        assertEquals(exchangeRates.get(1).getRate(), BigDecimal.valueOf(210));
+
     }
 
     @Test
@@ -26,7 +25,6 @@ class AlgorithmMoonForecastingTest {
         AlgorithmMoonForecasting algorithmMoonForecasting = new AlgorithmMoonForecasting(getDefaultData());
         List<ExchangeRates> exchangeRates = algorithmMoonForecasting.getListExchangeRates(CurrencyType.USD, LocalDate.now().plusDays(7));
         assertEquals(exchangeRates.size(), 1);
-        assertEquals(exchangeRates.get(0).getRate(), BigDecimal.valueOf(710));
     }
 
     private LinkedList<ExchangeRates> getDefaultData() {

@@ -1,7 +1,6 @@
 package ru.liga.fat.telegram;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.cli.CommandLine;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -10,8 +9,6 @@ import ru.liga.fat.enums.OutputCommandType;
 import ru.liga.fat.exception.ArgumentsOptionFormatterException;
 import ru.liga.fat.exception.SendMessageException;
 import ru.liga.fat.front.*;
-
-import java.util.Arrays;
 
 /**
  * Бот предсказывающий курс
@@ -41,23 +38,27 @@ public final class Bot extends TelegramLongPollingBot {
             Message message = update.getMessage();
             String messageText = message.getText();
             String chatId = message.getChatId().toString();
+            log.info(String.format("MessageText = %s,ChatId = %s", messageText, chatId));
             try {
-                log.info(String.format("MessageText = %s,ChatId = %s", messageText, chatId));
+                //Парсим команду
+                CommandParameters commandParameters = new CommandParametersSelector().chooseCommand(messageText);
+                commandParameters.initParams(messageText);
                 //Работаем по алгоритму
-                RatesPrediction ratesPrediction = new CommandHandler().invokeCommandFromConsole(messageText);;
+                RatesPrediction ratesPrediction = new CommandHandler().invokeCommandFromConsole(commandParameters);
                 log.debug("Result Algorithm: " + ratesPrediction.toString());
                 //Выбор обработки результата алгоритма предсказаний
                 log.debug("Select algorithm for output");
-                CommandLine cmd = new FormerConsoleArguments().getCommandLineFromCommand(messageText);
-                log.debug("CMD=" + Arrays.toString(cmd.getArgs()));
-                if (cmd.hasOption("output")) {
-                    IOutputRateCommander outputRateCommander = new OutputSelector().getOutput(OutputCommandType.valueOf(cmd.getOptionValue("output")));
+                if (commandParameters.getMapParameters().containsKey("output")
+                        && commandParameters.getParameters().get("output") != null) {
+                    IOutputRateCommander outputRateCommander = new OutputSelector().getOutput((OutputCommandType) commandParameters.getParameters().get("output"));
                     log.debug("outputRateCommander = " + outputRateCommander.getClass().getName());
                     outputRateCommander.sendToOut(ratesPrediction, chatId, this);
+                } else {
+                    new OutputList().sendToOut(ratesPrediction, chatId, this);
                 }
             } catch (RuntimeException e) {
                 log.error(e.getMessage(), e);
-                new SendingMessage().sendMessageToClient(this,chatId,e.getMessage());
+                new SendingMessage().sendMessageToClient(this, chatId, e.getMessage());
                 throw new ArgumentsOptionFormatterException(e);
             }
             log.info("Work with command finished");

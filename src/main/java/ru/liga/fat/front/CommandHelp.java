@@ -13,11 +13,11 @@ public class CommandHelp implements Command {
     /**
      * Распечатывает список команд прогарммы
      *
-     * @param listArgs полная команда
+     * @param commandParameters полная команда
      * @return List<List < ExchangeRates>> списки курсов
      */
     @Override
-    public RatesPrediction invoke(String listArgs) {
+    public RatesPrediction invoke(CommandParameters commandParameters) {
         LinkedList listCommands = new LinkedList();
         listCommands.add("Options:");
         listCommands.add("Rate <eur, usd, try> <today, tomorrow, week, month, dd/MM/yyyy>         Print Rate during period");

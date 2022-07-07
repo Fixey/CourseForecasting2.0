@@ -7,8 +7,8 @@ import ru.liga.fat.back.RatesPrediction;
  */
 interface Command {
     /**
-     * @param fullCommand полная команда
+     * @param commandParameters параметры команды
      * @return RatesPrediction списки курсов
      */
-    RatesPrediction invoke(String fullCommand);
+    RatesPrediction invoke(CommandParameters commandParameters);
 }

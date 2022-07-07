@@ -23,7 +23,7 @@ public class OutputGraph implements IOutputRateCommander {
      * @param bot             инстанс бота
      * @throws SendMessageException ошибка при отправке сообщения
      */
-    
+
     @Override
     public void sendToOut(RatesPrediction ratesPrediction, String chatId, Bot bot) {
         log.debug("OutputList args:");
