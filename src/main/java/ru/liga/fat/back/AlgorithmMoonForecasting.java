@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Slf4j
 public class AlgorithmMoonForecasting implements IRateAlgorithm {
-    private List<ExchangeRates> exchangeRatesFromFiles;
+    final private List<ExchangeRates> exchangeRatesFromFiles;
 
     public AlgorithmMoonForecasting(List<ExchangeRates> exchangeRatesFromFiles) {
         this.exchangeRatesFromFiles = exchangeRatesFromFiles;

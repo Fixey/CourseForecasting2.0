@@ -1,20 +1,15 @@
 package ru.liga.fat.front;
 
-import org.junit.jupiter.api.Test;
 import ru.liga.fat.back.ExchangeRates;
 import ru.liga.fat.back.RatesPrediction;
 import ru.liga.fat.enums.CurrencyType;
-import ru.liga.fat.exception.SendMessageException;
-import ru.liga.fat.telegram.Bot;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 class OutputListTest {
-    
+
 
     private RatesPrediction getDefaultData() {
         LinkedList<ExchangeRates> exchangeRates = new LinkedList<>();

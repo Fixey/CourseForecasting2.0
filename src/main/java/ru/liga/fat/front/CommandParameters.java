@@ -1,6 +1,5 @@
 package ru.liga.fat.front;
 
-import lombok.Data;
 import ru.liga.fat.enums.CommandsType;
 
 import java.util.HashMap;
@@ -18,8 +17,11 @@ public interface CommandParameters {
      * Все параметры
      */
     Map<String, Object> mapParameters = new HashMap<>();
+
     Map<String, Object> getMapParameters();
+
     CommandsType getCommand();
+
     /**
      * Инициализация парамтеров
      *

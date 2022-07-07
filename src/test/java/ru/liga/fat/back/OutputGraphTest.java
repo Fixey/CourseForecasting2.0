@@ -1,16 +1,10 @@
 package ru.liga.fat.back;
 
-import org.junit.jupiter.api.Test;
 import ru.liga.fat.enums.CurrencyType;
-import ru.liga.fat.exception.SendMessageException;
-import ru.liga.fat.front.OutputGraph;
-import ru.liga.fat.telegram.Bot;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedList;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OutputGraphTest {
 

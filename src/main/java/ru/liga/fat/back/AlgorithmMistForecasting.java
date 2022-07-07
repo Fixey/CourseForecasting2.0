@@ -17,7 +17,7 @@ import static ru.liga.fat.constant.ConstantUtil.FORECASTING_MIST_NUM;
  */
 @Slf4j
 public class AlgorithmMistForecasting implements IRateAlgorithm {
-    private List<ExchangeRates> exchangeRatesFromFiles;
+    final private List<ExchangeRates> exchangeRatesFromFiles;
 
     public AlgorithmMistForecasting(List<ExchangeRates> exchangeRatesFromFiles) {
         this.exchangeRatesFromFiles = exchangeRatesFromFiles;

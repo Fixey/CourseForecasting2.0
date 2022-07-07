@@ -17,7 +17,7 @@ import static ru.liga.fat.constant.ConstantUtil.FORECASTING_WEB_NUM;
  */
 @Slf4j
 public class AlgorithmWebForecasting implements IRateAlgorithm {
-    private List<ExchangeRates> exchangeRatesFromFiles;
+    final private List<ExchangeRates> exchangeRatesFromFiles;
 
     public AlgorithmWebForecasting(List<ExchangeRates> exchangeRatesFromFiles) {
         this.exchangeRatesFromFiles = exchangeRatesFromFiles;
@@ -80,7 +80,7 @@ public class AlgorithmWebForecasting implements IRateAlgorithm {
         while (!date.isEqual(lastDateLineExchangeRate)) {
             dayCounter++;
             LinearRegression linearRegression = new LinearRegression(rangeDays, arrRates);
-            BigDecimal rate = new BigDecimal(linearRegression.predict(FORECASTING_WEB_NUM.doubleValue() + dayCounter));
+            BigDecimal rate = BigDecimal.valueOf(linearRegression.predict(FORECASTING_WEB_NUM.doubleValue() + dayCounter));
             lastDateLineExchangeRate = lastDateLineExchangeRate.plusDays(1);
             listExchangeRates.add(new ExchangeRates(currency, rate, lastDateLineExchangeRate));
         }
