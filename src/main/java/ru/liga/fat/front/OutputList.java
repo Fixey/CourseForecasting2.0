@@ -5,7 +5,6 @@ import ru.liga.fat.back.ExchangeRates;
 import ru.liga.fat.back.RatesPrediction;
 import ru.liga.fat.enums.CurrencyType;
 import ru.liga.fat.exception.SendMessageException;
-import ru.liga.fat.telegram.Bot;
 
 import java.util.stream.Collectors;
 
@@ -17,11 +16,10 @@ public class OutputList implements IOutputRateCommander {
      *
      * @param ratesPrediction списки курсов
      * @param chatId          Id чата
-     * @param bot             инстанс бота
      * @throws SendMessageException ошибка при отправке сообщения
      */
     @Override
-    public void sendToOut(RatesPrediction ratesPrediction, String chatId, Bot bot) {
+    public SendingMessage getMessage(RatesPrediction ratesPrediction, String chatId) {
         log.debug("OutputList args:");
         log.debug("listExchangeRates =" + ratesPrediction.getListExchangeRates());
         log.debug("chatId =" + chatId);
@@ -32,7 +30,8 @@ public class OutputList implements IOutputRateCommander {
                     .stream()
                     .map(ExchangeRates::getInfo)
                     .collect(Collectors.joining("\n"));
-            sendingMessage.sendMessageToClient(bot, chatId, messageText);
+            sendingMessage.addMessage(messageText);
         }
+        return sendingMessage;
     }
 }

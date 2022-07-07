@@ -1,18 +1,17 @@
 package ru.liga.fat.front;
 
 import ru.liga.fat.back.RatesPrediction;
-import ru.liga.fat.telegram.Bot;
 
 /**
- * Обработчик output
+ * Обработчик output для команды Rate
  */
 public interface IOutputRateCommander {
     /**
-     * Отправка и обработка сообщения
+     * Формирование сообщения, которое надо отправить
      *
      * @param ratesPrediction список ставок который надо обработать
      * @param chatId          Id чата для отправки сообщения
-     * @param bot             Бот
+     * @return Object результат который надо вывести
      */
-    void sendToOut(RatesPrediction ratesPrediction, String chatId, Bot bot);
+    SendingMessage getMessage(RatesPrediction ratesPrediction, String chatId);
 }

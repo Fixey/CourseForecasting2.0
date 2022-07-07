@@ -18,7 +18,7 @@ public class CommandHandler {
     public RatesPrediction invokeCommandFromConsole(CommandParameters commandParameters) {
         try {
             log.debug("Start");
-            CommandsType commandName = (CommandsType) commandParameters.getParameters().get("command");
+            CommandsType commandName = commandParameters.getCommand();
             Command command = new CommandSelector().getCommand(commandName);
             return command.invoke(commandParameters);
         } catch (Exception e) {

@@ -14,16 +14,7 @@ import java.util.LinkedList;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OutputListTest {
-
-    @Test
-    void getSendMessageException() {
-        OutputList outputList = new OutputList();
-        String botToken = System.getenv("BOT_FORECASTING_TOKEN");
-        String botName = System.getenv("BOT_FORECASTING_NAME");
-        assertThrows(SendMessageException.class, () -> {
-            outputList.sendToOut(getDefaultData(), "3f", new Bot(botToken, botName));
-        });
-    }
+    
 
     private RatesPrediction getDefaultData() {
         LinkedList<ExchangeRates> exchangeRates = new LinkedList<>();

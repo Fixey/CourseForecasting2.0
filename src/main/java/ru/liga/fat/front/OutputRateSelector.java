@@ -6,14 +6,19 @@ import ru.liga.fat.exception.UnknownCommandException;
 /**
  * Выбор обработки output
  */
-public class OutputSelector {
+public class OutputRateSelector {
     /**
      * Выбрать как обработать output
      *
-     * @param output название output
+     * @param commandParameters параметры команды
      * @return IOutputRateCommander класс в котором будет выполняться обработка
      */
-    public IOutputRateCommander getOutput(OutputCommandType output) {
+    public IOutputRateCommander getOutput(CommandParameters commandParameters) {
+        var commandOutput = commandParameters.getParameters().get("output");
+        if (commandOutput == null) {
+            return new OutputList();
+        }
+        OutputCommandType output = (OutputCommandType) commandOutput;
         switch (output) {
             case list:
                 return new OutputList();
