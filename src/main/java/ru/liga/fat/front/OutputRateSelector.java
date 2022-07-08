@@ -14,11 +14,11 @@ public class OutputRateSelector {
      * @return IOutputRateCommander класс в котором будет выполняться обработка
      */
     public IOutputRateCommander getOutput(CommandParameters commandParameters) {
-        final var commandOutput = commandParameters.getMepOfParameters().get("output");
+        final var commandOutput =  (OutputCommandType) commandParameters.getMepOfParameters().get("output");
         if (commandOutput == null) {
             return new OutputList();
         }
-        OutputCommandType output = (OutputCommandType) commandOutput;
+        OutputCommandType output =  commandOutput;
         switch (output) {
             case list:
                 return new OutputList();
