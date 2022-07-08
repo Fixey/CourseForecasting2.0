@@ -1,6 +1,6 @@
 package ru.liga.fat.front;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -9,16 +9,16 @@ import java.util.List;
 /**
  * Объект для хранения информации
  */
-@Data
+@Getter
 public class SendingMessage {
     /**
      * Хранимые файлы
      */
-    public List<File> listFile = new LinkedList<>();
+    private List<File> listFile = new LinkedList<>();
     /**
      * Хранимые текстовые сообщения
      */
-    public List<String> listMessage = new LinkedList<>();
+    private List<String> listMessage = new LinkedList<>();
 
     /**
      * Доабвить файл

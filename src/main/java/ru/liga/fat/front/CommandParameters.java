@@ -18,21 +18,12 @@ public interface CommandParameters {
      */
     Map<String, Object> mapParameters = new HashMap<>();
 
-    Map<String, Object> getMapParameters();
-
     CommandsType getCommand();
-
-    /**
-     * Инициализация парамтеров
-     *
-     * @param command название команды
-     */
-    void initParams(String command);
 
     /**
      * Вернуть параметры в виде мапы
      *
      * @return Map<String, Object> Мапа<Флаг,Значение></> объектов команды
      */
-    Map<String, Object> getParameters();
+    Map<String, Object> getMepOfParameters();
 }

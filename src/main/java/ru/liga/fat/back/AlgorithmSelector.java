@@ -4,7 +4,6 @@ import ru.liga.fat.enums.AlgorithmType;
 import ru.liga.fat.exception.UnknownAlgorithmException;
 import ru.liga.fat.front.IAlgorithmSelector;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,10 +14,6 @@ public class AlgorithmSelector implements IAlgorithmSelector {
 
     public AlgorithmSelector() {
         this.listExchangeRates = Configurations.init().getListExchangeRatesFromFile();
-    }
-
-    public AlgorithmSelector(LinkedList<ExchangeRates> listExchangeRates) {
-        this.listExchangeRates = listExchangeRates;
     }
 
     /**

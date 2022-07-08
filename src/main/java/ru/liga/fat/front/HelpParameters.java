@@ -9,18 +9,17 @@ import java.util.Map;
 
 @Data
 public class HelpParameters implements CommandParameters {
-    public CommandsType command;
-    public Map<String, Object> mapParameters = new HashMap<>();
+    final private CommandsType command;
+    private Map<String, Object> mapParameters = new HashMap<>();
 
     /**
      * Инициализация парамтеров
      *
      * @param command название команды
      */
-    @Override
-    public void initParams(String command) {
+    public HelpParameters(String command) {
         this.command = EnumUtils.getEnumIgnoreCase(CommandsType.class, command.trim());
-        getParameters();
+        getMepOfParameters();
     }
 
     /**
@@ -29,7 +28,7 @@ public class HelpParameters implements CommandParameters {
      * @return Map<String, Object> Мапа<Флаг,Значение></> объектов команды
      */
     @Override
-    public Map<String, Object> getParameters() {
+    public Map<String, Object> getMepOfParameters() {
         mapParameters.put("help", this.command);
         return mapParameters;
     }

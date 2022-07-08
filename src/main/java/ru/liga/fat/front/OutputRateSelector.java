@@ -14,7 +14,7 @@ public class OutputRateSelector {
      * @return IOutputRateCommander класс в котором будет выполняться обработка
      */
     public IOutputRateCommander getOutput(CommandParameters commandParameters) {
-        var commandOutput = commandParameters.getParameters().get("output");
+        final var commandOutput = commandParameters.getMepOfParameters().get("output");
         if (commandOutput == null) {
             return new OutputList();
         }

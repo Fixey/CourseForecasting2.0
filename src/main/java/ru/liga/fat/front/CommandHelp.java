@@ -16,7 +16,6 @@ public class CommandHelp implements Command {
      */
     @Override
     public RatesPrediction invoke(CommandParameters commandParameters) {
-
         return new RatesPrediction();
     }
 }

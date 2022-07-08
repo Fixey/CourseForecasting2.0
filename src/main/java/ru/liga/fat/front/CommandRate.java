@@ -31,16 +31,14 @@ public class CommandRate implements Command {
      */
     public RatesPrediction invoke(CommandParameters commandParameters) {
         RateParameters rateParameters = (RateParameters) commandParameters;
-        log.info("Invoked " + this.getClass().getName());
-        //Выбор и релазиация алгоритма
-        IRateAlgorithm algorithm = algorithmSelector.getAlgorithm(rateParameters.algorithmType);
+        IRateAlgorithm algorithm = algorithmSelector.getAlgorithm(rateParameters.getAlgorithmType());
         log.info("Choose algorithm = " + algorithm.getClass().getName());
         RatesPrediction ratesPrediction = new RatesPrediction();
-        for (CurrencyType currency : rateParameters.currencies) {
-            if (rateParameters.period != null) {
-                ratesPrediction.addListExchangeRates(algorithm.getListExchangeRates(currency, rateParameters.period));
+        for (CurrencyType currency : rateParameters.getCurrencies()) {
+            if (rateParameters.getPeriod() != null) {
+                ratesPrediction.addListExchangeRates(algorithm.getListExchangeRates(currency, rateParameters.getPeriod()));
             } else {
-                ratesPrediction.addListExchangeRates(algorithm.getListExchangeRates(currency, rateParameters.date));
+                ratesPrediction.addListExchangeRates(algorithm.getListExchangeRates(currency, rateParameters.getDate()));
             }
         }
         return ratesPrediction;

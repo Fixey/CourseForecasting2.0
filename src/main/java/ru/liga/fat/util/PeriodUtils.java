@@ -16,7 +16,6 @@ import static ru.liga.fat.constant.ConstantUtil.DATE_REGEX;
 import static ru.liga.fat.constant.ConstantUtil.DATE_TIME_FORMATTER;
 
 public class PeriodUtils {
-
     /**
      * Рассчет кол-ва дней с текущего дня до определнное даты
      *
@@ -60,7 +59,7 @@ public class PeriodUtils {
         final LocalDateTime today = LocalDateTime.now();
         LinkedList<String> listDates = new LinkedList<>();
         String strData;
-        if (days == 0) { //Для текущего дня
+        if (days == 0) {
             strData = DATE_TIME_FORMATTER.format(today);
             listDates.add(Character.toUpperCase(strData.charAt(0)) + strData.substring(1) + " - ");
             return listDates;

@@ -1,5 +1,8 @@
 package ru.liga.fat.front;
 
+/**
+ * Вывод команды Help
+ */
 public class OutputHelp {
     public String getHelpMessage() {
         return "Options:\n\n" +

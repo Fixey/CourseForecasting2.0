@@ -22,9 +22,9 @@ public class CommandParametersSelector {
         }
         switch (command) {
             case rate:
-                return new RateParameters();
+                return new RateParameters(fullCommand);
             case help:
-                return new HelpParameters();
+                return new HelpParameters(fullCommand);
         }
         throw new ConsoleArgsException();
     }

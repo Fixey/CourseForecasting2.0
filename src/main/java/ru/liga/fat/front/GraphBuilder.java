@@ -29,7 +29,7 @@ public class GraphBuilder {
             log.debug("ratesPrediction currencies = " + ratesPrediction.getCurrencies().toString());
             Plot plot = Plot.create();
             int color_counter = 0;
-            for (CurrencyType currency : ratesPrediction.currencies) {
+            for (CurrencyType currency : ratesPrediction.getCurrencies()) {
                 plot.plot().color(COLOR_DICT.get(color_counter))
                         .add(ratesPrediction.getRateByCurrency(currency))
                         .label(currency.name());

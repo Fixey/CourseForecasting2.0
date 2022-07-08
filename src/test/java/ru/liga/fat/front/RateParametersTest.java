@@ -8,9 +8,8 @@ class RateParametersTest {
 
     @Test
     void getParameters() {
-        RateParameters rateParameters = new RateParameters();
-        rateParameters.initParams("rate usd,eur -period week -alg mist -output list");
-        Map<String, Object> params = rateParameters.getParameters();
+        RateParameters rateParameters = new RateParameters("rate usd,eur -period week -alg mist -output list");
+        Map<String, Object> params = rateParameters.getMepOfParameters();
         System.out.println(params);
     }
 }

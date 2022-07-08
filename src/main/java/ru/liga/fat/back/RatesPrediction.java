@@ -1,6 +1,6 @@
 package ru.liga.fat.back;
 
-import lombok.Data;
+import lombok.Getter;
 import ru.liga.fat.enums.CurrencyType;
 
 import java.math.BigDecimal;
@@ -12,17 +12,17 @@ import java.util.stream.Collectors;
 /**
  * Предсказзаные курсы
  */
-@Data
+@Getter
 public class RatesPrediction {
     /**
      * Курсы которые есть в listExchangeRates
      */
-    public List<CurrencyType> currencies = new LinkedList<>();
+    private List<CurrencyType> currencies = new LinkedList<>();
 
     /**
      * Лист всех предсказаных курсов
      */
-    public List<ExchangeRates> listExchangeRates = new LinkedList<>();
+    private List<ExchangeRates> listExchangeRates = new LinkedList<>();
 
     /**
      * Добавить в список курсов

@@ -14,9 +14,9 @@ import static ru.liga.fat.constant.ConstantUtil.DATE_TIME_FORMATTER;
 @Data
 final public class ExchangeRates {
 
-    public LocalDate date;
-    public BigDecimal rate;
-    public CurrencyType currency;
+    final private LocalDate date;
+    final private BigDecimal rate;
+    final private CurrencyType currency;
 
     public ExchangeRates(CurrencyType currency, BigDecimal rate, LocalDate date) {
         this.currency = currency;
