@@ -3,6 +3,7 @@ package ru.liga.fat.front;
 import lombok.Data;
 import org.apache.commons.lang3.EnumUtils;
 import ru.liga.fat.enums.CommandsType;
+import ru.liga.fat.enums.OutputCommandType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,16 @@ public class HelpParameters implements CommandParameters {
     public HelpParameters(String command) {
         this.command = EnumUtils.getEnumIgnoreCase(CommandsType.class, command.trim());
         getMepOfParameters();
+    }
+
+    /**
+     * Output
+     *
+     * @return вернуть
+     */
+    @Override
+    public OutputCommandType getOutputCommandType() {
+        return null;
     }
 
     /**

@@ -81,6 +81,16 @@ public class RateParameters implements CommandParameters {
     }
 
     /**
+     * Output
+     *
+     * @return вернуть
+     */
+    @Override
+    public OutputCommandType getOutputCommandType() {
+        return this.output;
+    }
+
+    /**
      * Вернуть параметры в виде мапы
      *
      * @return Map<String, Object> Мапа<Флаг,Значение></> объектов команды
