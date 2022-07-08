@@ -10,8 +10,7 @@ public interface IOutputRateCommander {
      * Формирование сообщения, которое надо отправить
      *
      * @param ratesPrediction список ставок который надо обработать
-     * @param chatId          Id чата для отправки сообщения
      * @return Object результат который надо вывести
      */
-    SendingMessage getMessage(RatesPrediction ratesPrediction, String chatId);
+    SendingMessage getMessage(RatesPrediction ratesPrediction);
 }

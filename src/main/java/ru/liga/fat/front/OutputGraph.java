@@ -18,16 +18,14 @@ public class OutputGraph implements IOutputRateCommander {
      * Вывод графика
      *
      * @param ratesPrediction название output
-     * @param chatId          Id чата
      * @return File файл
      * @throws SendMessageException ошибка при отправке сообщения
      */
 
     @Override
-    public SendingMessage getMessage(RatesPrediction ratesPrediction, String chatId) {
+    public SendingMessage getMessage(RatesPrediction ratesPrediction) {
         log.debug("OutputList args:");
         log.debug("listsExchangeRates =" + ratesPrediction.toString());
-        log.debug("chatId =" + chatId);
         new GraphBuilder().createGraph(ratesPrediction);
         log.debug("Created successfully");
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(GRAPH_PATH)).getFile());

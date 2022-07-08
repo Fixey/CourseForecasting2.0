@@ -47,14 +47,7 @@ public final class Bot extends TelegramLongPollingBot {
                 log.debug("Result Algorithm: " + ratesPrediction.toString());
                 //Выбор обработки результата алгоритма предсказаний
                 log.debug("Select algorithm for output");
-                SendingMessage sendingMessage = new SendingMessage();
-                if (commandParameters.getCommand().name().equals("help")) {
-                    sendingMessage.addMessage(new OutputHelp().getHelpMessage());
-                } else {
-                    IOutputRateCommander outputRateCommander = new OutputRateSelector().getOutput(commandParameters);
-                    sendingMessage = outputRateCommander.getMessage(ratesPrediction, chatId);
-                    log.debug("outputRateCommander = " + outputRateCommander.getClass().getName());
-                }
+                SendingMessage sendingMessage = new OutputSelector().getMessage(commandParameters, ratesPrediction);
                 new SendingMessageEngine().sendMessageToClient(this, chatId, sendingMessage);
             } catch (RuntimeException e) {
                 log.error(e.getMessage(), e);
