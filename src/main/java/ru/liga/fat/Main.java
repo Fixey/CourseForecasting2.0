@@ -4,8 +4,8 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import ru.liga.fat.back.Configurations;
-import ru.liga.fat.telegram.Bot;
+import ru.liga.fat.tech.Configurations;
+import ru.liga.fat.tech.Bot;
 
 /**
  * Запуск программы
