@@ -1,10 +1,10 @@
 package ru.liga.fat.tech;
 
 import org.junit.jupiter.api.Test;
-import ru.liga.fat.business.GraphBuilder;
-import ru.liga.fat.tech.entity.ExchangeRates;
-import ru.liga.fat.tech.entity.RatesPrediction;
-import ru.liga.fat.tech.enums.CurrencyType;
+import ru.liga.fat.algorithm.GraphBuilder;
+import ru.liga.fat.entity.ExchangeRates;
+import ru.liga.fat.entity.RatesPrediction;
+import ru.liga.fat.enums.CurrencyType;
 
 import java.io.File;
 import java.math.BigDecimal;

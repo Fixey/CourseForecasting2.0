@@ -1,8 +1,9 @@
 package ru.liga.fat.business;
 
 import org.junit.jupiter.api.Test;
-import ru.liga.fat.tech.enums.CurrencyType;
-import ru.liga.fat.tech.entity.ExchangeRates;
+import ru.liga.fat.algorithm.AlgorithmWebForecasting;
+import ru.liga.fat.enums.CurrencyType;
+import ru.liga.fat.entity.ExchangeRates;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

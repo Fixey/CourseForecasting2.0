@@ -2,7 +2,9 @@ package ru.liga.fat.tech;
 
 import org.apache.commons.cli.CommandLine;
 import org.junit.jupiter.api.Test;
-import ru.liga.fat.tech.exception.*;
+import ru.liga.fat.command.CommandRateValidation;
+import ru.liga.fat.command.FormerConsoleArguments;
+import ru.liga.fat.command.exception.*;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

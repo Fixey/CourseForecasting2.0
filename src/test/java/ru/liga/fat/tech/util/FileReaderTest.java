@@ -1,8 +1,8 @@
 package ru.liga.fat.tech.util;
 
 import org.junit.jupiter.api.Test;
-import ru.liga.fat.tech.exception.FailFileException;
-import ru.liga.fat.tech.util.FileReader;
+import ru.liga.fat.csvfile.FileReader;
+import ru.liga.fat.csvfile.exception.FailFileException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
