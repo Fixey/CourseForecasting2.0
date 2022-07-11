@@ -2,8 +2,8 @@ package ru.liga.fat.output;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.liga.fat.algorithm.GraphBuilder;
-import ru.liga.fat.sending.SendingMessage;
 import ru.liga.fat.entity.RatesPrediction;
+import ru.liga.fat.sending.SendingMessage;
 import ru.liga.fat.sending.exception.SendMessageException;
 
 import java.io.File;

@@ -1,9 +1,9 @@
 package ru.liga.fat.command;
 
 import org.apache.commons.lang3.EnumUtils;
+import ru.liga.fat.command.exception.ConsoleArgsException;
 import ru.liga.fat.entity.RateParameters;
 import ru.liga.fat.enums.CommandsType;
-import ru.liga.fat.command.exception.ConsoleArgsException;
 
 /**
  * Выбор распарсивателя в зависимости от команды

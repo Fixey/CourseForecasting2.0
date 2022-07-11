@@ -1,7 +1,7 @@
 package ru.liga.fat.output;
 
-import ru.liga.fat.sending.SendingMessage;
 import ru.liga.fat.entity.RatesPrediction;
+import ru.liga.fat.sending.SendingMessage;
 
 /**
  * Обработчик output для команды Rate

@@ -7,11 +7,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.liga.fat.command.CommandHandler;
 import ru.liga.fat.command.CommandParameters;
 import ru.liga.fat.command.CommandParametersSelector;
+import ru.liga.fat.command.exception.ArgumentsOptionFormatterException;
+import ru.liga.fat.entity.RatesPrediction;
 import ru.liga.fat.output.OutputSelector;
 import ru.liga.fat.sending.SendingMessage;
 import ru.liga.fat.sending.SendingMessageEngine;
-import ru.liga.fat.entity.RatesPrediction;
-import ru.liga.fat.command.exception.ArgumentsOptionFormatterException;
 import ru.liga.fat.sending.exception.SendMessageException;
 
 /**

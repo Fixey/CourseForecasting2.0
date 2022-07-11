@@ -2,8 +2,8 @@ package ru.liga.fat.csvfile;
 
 import lombok.NonNull;
 import org.apache.commons.lang3.EnumUtils;
-import ru.liga.fat.enums.Period;
 import ru.liga.fat.command.exception.CountDaysException;
+import ru.liga.fat.enums.Period;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

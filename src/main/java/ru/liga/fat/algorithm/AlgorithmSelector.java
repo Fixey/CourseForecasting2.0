@@ -1,9 +1,9 @@
 package ru.liga.fat.algorithm;
 
+import ru.liga.fat.algorithm.exception.UnknownAlgorithmException;
 import ru.liga.fat.csvfile.Configurations;
 import ru.liga.fat.entity.ExchangeRates;
 import ru.liga.fat.enums.AlgorithmType;
-import ru.liga.fat.algorithm.exception.UnknownAlgorithmException;
 
 import java.util.List;
 

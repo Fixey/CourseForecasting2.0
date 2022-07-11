@@ -1,9 +1,9 @@
 package ru.liga.fat.command;
 
 import lombok.extern.slf4j.Slf4j;
+import ru.liga.fat.command.exception.ConsoleException;
 import ru.liga.fat.entity.RatesPrediction;
 import ru.liga.fat.enums.CommandsType;
-import ru.liga.fat.command.exception.ConsoleException;
 
 /**
  * Оболочка для вызова команды

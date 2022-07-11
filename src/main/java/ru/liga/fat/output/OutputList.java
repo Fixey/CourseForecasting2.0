@@ -1,10 +1,10 @@
 package ru.liga.fat.output;
 
 import lombok.extern.slf4j.Slf4j;
-import ru.liga.fat.sending.SendingMessage;
 import ru.liga.fat.entity.ExchangeRates;
 import ru.liga.fat.entity.RatesPrediction;
 import ru.liga.fat.enums.CurrencyType;
+import ru.liga.fat.sending.SendingMessage;
 import ru.liga.fat.sending.exception.SendMessageException;
 
 import java.util.stream.Collectors;

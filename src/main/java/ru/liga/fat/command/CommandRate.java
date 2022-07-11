@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import ru.liga.fat.algorithm.AlgorithmSelector;
 import ru.liga.fat.algorithm.IAlgorithmSelector;
 import ru.liga.fat.algorithm.IRateAlgorithm;
+import ru.liga.fat.command.exception.CountDaysException;
 import ru.liga.fat.entity.RateParameters;
 import ru.liga.fat.entity.RatesPrediction;
 import ru.liga.fat.enums.CurrencyType;
-import ru.liga.fat.command.exception.CountDaysException;
 
 /**
  * Класс отвечающий за действия по команде Rate

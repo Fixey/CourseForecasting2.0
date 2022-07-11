@@ -1,8 +1,8 @@
 package ru.liga.fat.tech;
 
-import ru.liga.fat.tech.enums.CurrencyType;
-import ru.liga.fat.tech.entity.ExchangeRates;
-import ru.liga.fat.tech.entity.RatesPrediction;
+import ru.liga.fat.enums.CurrencyType;
+import ru.liga.fat.entity.ExchangeRates;
+import ru.liga.fat.entity.RatesPrediction;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

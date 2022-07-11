@@ -1,7 +1,7 @@
 package ru.liga.fat.tech;
 
 import org.junit.jupiter.api.Test;
-import ru.liga.fat.tech.entity.RateParameters;
+import ru.liga.fat.entity.RateParameters;
 
 import java.util.Map;
 

@@ -3,9 +3,9 @@ package ru.liga.fat.algorithm;
 import com.github.sh0nk.matplotlib4j.Plot;
 import com.github.sh0nk.matplotlib4j.PythonExecutionException;
 import lombok.extern.slf4j.Slf4j;
+import ru.liga.fat.algorithm.exception.CreateGraphException;
 import ru.liga.fat.entity.RatesPrediction;
 import ru.liga.fat.enums.CurrencyType;
-import ru.liga.fat.algorithm.exception.CreateGraphException;
 
 import java.io.IOException;
 

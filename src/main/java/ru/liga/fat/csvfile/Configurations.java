@@ -4,9 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.EnumUtils;
 import ru.liga.fat.command.exception.CurrencyRateException;
 import ru.liga.fat.csvfile.exception.AverageIndexOutException;
+import ru.liga.fat.csvfile.exception.FailReadFile;
 import ru.liga.fat.entity.ExchangeRates;
 import ru.liga.fat.enums.CurrencyType;
-import ru.liga.fat.csvfile.exception.FailReadFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
